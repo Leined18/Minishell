@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
+#    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/10/16 13:21:50 by danpalac         ###   ########.fr        #
+#    Updated: 2024/10/17 12:24:29 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ IFLAGS		:= -I$(INC) -I$(LIBFT_INC)
 #==========SOURCES============================================================#
 
 
-SHELL_FILES := shell
+SHELL_FILES := shell main signals commands
 
 #==========FILES###===========================================================#
 

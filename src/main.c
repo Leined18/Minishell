@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/17 12:23:46 by danpalac         ###   ########.fr       */
+/*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
+/*   Updated: 2024/10/17 12:26:13 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "libft.h"
-# include <signal.h>
+int	main(int argc, char **argv, char **envp)
+{
+	pid_t pid;
 
-# define PROMPT "minishell$ "
-
-void		signal_setup(void);
-void		send_signal(int pid, int signal);
-void		signal_handler(int signum);
-
-
-void		shell_loop(char **envp);
-void		process_input(char *input, char **envp);
-void		free_command(t_command *cmd);
-
-#endif
+	if (argc >= 2)
+	{
+		write(1, "Usage: ./minishell\n", 19);
+		return (1);
+	}
+	(void)argv;
+	signal_setup();
+	pid = fork();
+	if (pid == 0)
+	{
+		shell_loop(envp);
+	}
+	else
+	{
+		while (1)
+		{
+			pause();
+			kill(pid, SIGUSR1);
+		}
+	}
+	return (0);
+}
