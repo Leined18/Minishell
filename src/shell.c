@@ -6,27 +6,33 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/17 12:25:26 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/17 13:01:08 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	shell_loop(char **envp)
+void	shell_loop(char **envp, pid_t pid)
 {
-	char	*input;
+	char		*input;
+	static char	**env = NULL;
 
-	while (1)
+	if (!env)
+		env = envp;
+	while (1) // Loop para esperar nueva entrada
 	{
-		write(1, "minishell> ", 11);
+		ft_printf(PROMPT);
 		input = get_next_line(0);
 		if (!input)
 		{
-			write(1, "exit\n", 5);
+			ft_printf("exit\n");
 			break ;
 		}
-		process_input(input, envp);
-		free(input);
+		process_input(input, env);
+		free_null(input);
+		ft_successful("Shell loop ended", 0);
+		send_signal(pid, SIGUSR1); // Manda señal al padre
+		pause();                   // Espera señal del padre para continuar
 	}
 }
 
@@ -40,7 +46,6 @@ void	process_input(char *input, char **envp)
 	{
 		execute_command(cmd);
 		free_command(cmd);
-		send_signal(getppid(), SIGUSR1);
 	}
 	else
 		ft_error("Failed to parse command", 1);

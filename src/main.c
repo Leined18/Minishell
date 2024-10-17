@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/17 12:26:13 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/17 12:38:16 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int	main(int argc, char **argv, char **envp)
 	pid = fork();
 	if (pid == 0)
 	{
-		shell_loop(envp);
+		shell_loop(envp, getppid());
 	}
 	else
 	{
 		while (1)
 		{
 			pause();
-			kill(pid, SIGUSR1);
+			kill(pid, SIGUSR2);
 		}
 	}
 	return (0);
