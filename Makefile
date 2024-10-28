@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/10/17 12:24:29 by danpalac         ###   ########.fr        #
+#    Updated: 2024/10/28 15:19:43 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,26 @@ OBJ_DIR 		:= obj/
 LIBFT_DIR		:= libft/
 LIBFT_INC		:= $(LIBFT_DIR)inc/
 
+BUILTINS_DIR	:= builtins/
+COMMANDS_DIR	:= commands/
+ENV_DIR			:= env/
+ERRORS_DIR		:= errors/
+INPUT_DIR		:= input/
+INTERPRETER_DIR	:= interpreter/
+MEMORY_DIR		:= memory/
+SHELL_DIR		:= shell/
+SIGNALS 		:= signals/
+
+INC_BUILINS		:= $(SRC_DIR)$(BUILTINS_DIR)
+INC_COMMANDS	:= $(SRC_DIR)$(COMMANDS_DIR)
+INC_ENV			:= $(SRC_DIR)$(ENV_DIR)
+INC_ERRORS		:= $(SRC_DIR)$(ERRORS_DIR)
+INC_INPUT		:= $(SRC_DIR)$(INPUT_DIR)
+INC_INTERPRETER	:= $(SRC_DIR)$(INTERPRETER_DIR)
+INC_MEMORY		:= $(SRC_DIR)$(MEMORY_DIR)
+INC_SHELL		:= $(SRC_DIR)$(SHELL_DIR)
+INC_SIGNALS		:= $(SRC_DIR)$(SIGNALS)
+
 #==========COMMANDS============================================================#
 
 CC			:= gcc
@@ -73,25 +93,39 @@ AR			:= ar rcs
 LIB			:= ranlib
 MKDIR 		:= mkdir -p
 LDFLAGS		:= -L$(LIBFT_DIR) -lft -lm -fsanitize=address
-IFLAGS		:= -I$(INC) -I$(LIBFT_INC)
+IFLAGS		:= -I$(INC) -I$(LIBFT_INC) -I$(INC_BUILINS) -I$(INC_COMMANDS) -I$(INC_ENV) -I$(INC_ERRORS) -I$(INC_INPUT) -I$(INC_INTERPRETER) -I$(INC_MEMORY) -I$(INC_SHELL) -I$(INC_SIGNALS)
 
 
 #==========SOURCES============================================================#
 
 
-SHELL_FILES := shell main signals commands
+BUILTINS_FILES :=
+COMMANDS_FILES := commands
+ENV_FILES :=
+ERRORS_FILES :=
+INPUT_FILES :=
+INTERPRETER_FILES :=
+MEMORY_FILES :=
+SHELL_FILES := main shell
+SIGNALS_FILES := signals
 
 #==========FILES###===========================================================#
 
-SRC_FILES+=$(SHELL_FILES)
+SRC_FILES+=$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
+SRC_FILES+=$(addprefix $(COMMANDS_DIR), $(COMMANDS_FILES))
+SRC_FILES+=$(addprefix $(ENV_DIR), $(ENV_FILES))
+SRC_FILES+=$(addprefix $(ERRORS_DIR), $(ERRORS_FILES))
+SRC_FILES+=$(addprefix $(INPUT_DIR), $(INPUT_FILES))
+SRC_FILES+=$(addprefix $(INTERPRETER_DIR), $(INTERPRETER_FILES))
+SRC_FILES+=$(addprefix $(MEMORY_DIR), $(MEMORY_FILES))
+SRC_FILES+=$(addprefix $(SHELL_DIR), $(SHELL_FILES))
+SRC_FILES+=$(addprefix $(SIGNALS), $(SIGNALS_FILES))
 
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 DEPS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 
 #==========RULES==============================================================#
-
-
 
 all: $(NAME)
 bonus: $(BONUS)

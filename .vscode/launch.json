@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/danpalac/sgoinfre/Minishell/src",
-      "program": "/home/danpalac/sgoinfre/Minishell/src/build/Debug/outDebug",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceRoot}/minishell",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
