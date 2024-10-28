@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/28 15:38:15 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:56:43 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	shell_loop(char **envp, pid_t pid)
 			break ;
 		}
 		process_input(input, env);
-		free_null(input);
+		free_null((void *)&input);
 		ft_successful("Shell loop ended", 0);
 		send_signal(pid, SIGUSR1); // Manda señal al padre
 		pause();                   // Espera señal del padre para continuar

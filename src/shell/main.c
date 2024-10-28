@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/28 16:02:07 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/28 19:51:05 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,11 @@ int	init_memory(t_memory *mem, int ac, char **av, char **envp)
 int	clean_up(t_memory *mem)
 {
 	if (mem->data)
-		free_null(mem->data);
+		FREE(mem->data);
 	if (mem->tree)
-		free_null(mem->tree);
+		FREE(mem->tree);
 	if (mem->node)
-		free_null(mem->node);
-	mem->data = NULL;
-	mem->tree = NULL;
-	mem->node = NULL;
+		FREE(mem->node);
 	return (1);
 }
 
@@ -88,16 +85,14 @@ int	main(int argc, char **argv, char **envp)
 	t_memory mem;
 
 	mem = (t_memory){0};
-
 	if (argc >= 2)
 	{
 		write(1, "Usage: ./minishell\n", 19);
 		return (1);
 	}
+	DEBUG("Trying to initialize memory");
 	if (!init_memory(&mem, argc, argv, envp))
 		ft_error("Error in memory allocation\n", 0);
-	clean_up(&mem);
-	printf(HOLA);
-	ft_successful(SUCCESS, 0);
+	_(clean_up(&mem), ft_successful(SUCCESS, 1));
 	return (0);
 }
