@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
+#    By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/10/29 13:23:47 by danpalac         ###   ########.fr        #
+#    Updated: 2024/10/29 19:00:05 by mvidal-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -127,6 +127,8 @@ DEPS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 
 #==========RULES==============================================================#
 
+-include $(DEPS)
+
 all: $(NAME)
 bonus: $(BONUS)
 
@@ -136,8 +138,8 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
 
 $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
-	@echo "$(BOLD_CYAN)[$(BOLD_PURPLE)$(NAME)$(DEF_COLOR)$(BOLD_CYAN)] compiled!$(DEF_COLOR)"
-	@echo "$(BOLD_CYAN)------------\n| Done! 👌 |\n------------$(DEF_COLOR)"
+	@echo -e "$(BOLD_CYAN)[$(BOLD_MAGENTA)$(NAME)$(BOLD_CYAN)] compiled!$(DEF_COLOR)"
+	@echo -e "$(BOLD_CYAN)------------\n| Done! 👌 |\n------------$(DEF_COLOR)"
 
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)
@@ -145,16 +147,14 @@ $(LIBFT):
 clean:
 	@$(RM) -rf $(OBJ_DIR)
 	@make clean -sC $(LIBFT_DIR)
-	@echo "$(CYAN)[$(NAME)]:\tobject files $(GREEN) => Cleaned!$(DEF_COLOR)"
+	@echo -e "$(CYAN)[$(NAME)]:\tobject files $(GREEN) => Cleaned!$(DEF_COLOR)"
 
 fclean: clean
 	@$(RM) -rf $(NAME)
 	@make fclean -sC $(LIBFT_DIR)
-	@echo "$(CYAN)[$(NAME)]:\texec. files $(GREEN) => Cleaned!$(DEF_COLOR)"
+	@echo -e "$(CYAN)[$(NAME)]:\texec. files $(GREEN) => Cleaned!$(DEF_COLOR)"
 
 re: fclean all
-
--include $(DEPS)
 
 .SILENT: all clean fclean
 .PHONY: all clean fclean re bonus
