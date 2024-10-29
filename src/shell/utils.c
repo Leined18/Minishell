@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_utils.c                                     :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 10:54:40 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/29 11:04:37 by danpalac         ###   ########.fr       */
+/*   Created: 2024/10/29 12:14:31 by danpalac          #+#    #+#             */
+/*   Updated: 2024/10/29 12:15:48 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signals.h"
+#include "shell.h"
 
-void	signal_setup(void (funtion)(int signal))
+t_memory *memget(t_memory **mem, int b)
 {
-	signal(SIGUSR1, funtion);
-	signal(SIGUSR2, funtion);
-}
+    static t_memory *memory = NULL;
 
-int	send_signal(int pid, int signal)
-{
-	if (kill(pid, signal) == -1)
-		return (FALSE);
-	return (TRUE);
+    if (mem)
+        memory = *mem;
+    if (b)
+        return (memory);
+    return (NULL);
 }

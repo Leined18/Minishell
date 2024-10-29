@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/10/28 15:19:43 by danpalac         ###   ########.fr        #
+#    Updated: 2024/10/29 13:23:47 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,8 +106,8 @@ ERRORS_FILES :=
 INPUT_FILES :=
 INTERPRETER_FILES :=
 MEMORY_FILES :=
-SHELL_FILES := main shell
-SIGNALS_FILES := signals
+SHELL_FILES := main shell cleanup init
+SIGNALS_FILES := signal_handler signal_utils
 
 #==========FILES###===========================================================#
 
