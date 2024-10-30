@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/29 12:12:38 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:20:03 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "commands.h"
+#include "minishell.h"
 #include "shell.h"
 
 void	shell_loop(char **envp, pid_t pid)
@@ -21,20 +21,16 @@ void	shell_loop(char **envp, pid_t pid)
 
 	if (!env)
 		env = envp;
-	while (1) // Loop para esperar nueva entrada
+	while (1)
 	{
 		ft_printf(PROMPT);
 		input = get_next_line(0);
 		if (!input)
-		{
-			ft_printf("exit\n");
-			break ;
-		}
+			continue ;
 		process_input(input, env);
 		free_null((void *)&input);
-		ft_successful("Shell loop ended", 0);
-		send_signal(pid, SIGUSR1); // Manda señal al padre
-		pause();                   // Espera señal del padre para continuar
+		send_signal(pid, SIGUSR1);
+		pause();
 	}
 }
 
@@ -42,12 +38,14 @@ void	process_input(char *input, char **envp)
 {
 	t_command *cmd;
 
+	if (!input || !*input)
+		return ;
 	input[strcspn(input, "\n")] = 0;
 	cmd = parse_command(input, envp);
 	if (cmd)
 	{
 		execute_command(cmd);
-		free_command(cmd);
+		free_command(&cmd);
 	}
 	else
 		ft_error("Failed to parse command", 1);
