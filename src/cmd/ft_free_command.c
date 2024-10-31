@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   ft_free_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 11:23:35 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/31 09:09:28 by danpalac         ###   ########.fr       */
+/*   Created: 2024/10/31 09:22:11 by danpalac          #+#    #+#             */
+/*   Updated: 2024/10/31 10:08:59 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "commands.h"
 
-int	clean_up(t_memory *mem)
+void	free_command(t_command **cmd)
 {
-	if (mem->list)
-		ft_lstclear(&mem->list, free);
-	if (mem->data)
-		free_null((void *)&mem->data);
-	if (mem->tree)
-		free_null((void *)&mem->tree);
-	if (mem->node)
-		free_null((void *)&mem->node);
-	return (1);
+	if (cmd)
+	{
+		if ((*cmd)->args)
+			free_2d((*cmd)->args);
+		if ((*cmd)->cmd_path)
+			free_null((void *)&(*cmd)->cmd_path);
+		free(*cmd);
+		*cmd = NULL;
+	}
 }

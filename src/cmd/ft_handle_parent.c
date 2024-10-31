@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   ft_handle_parent.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 12:23:24 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/28 15:37:18 by mvidal-h         ###   ########.fr       */
+/*   Created: 2024/10/15 12:55:40 by danpalac          #+#    #+#             */
+/*   Updated: 2024/10/31 09:27:19 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "commands.h"
 
-void	free_command(t_command *cmd)
+void	handle_parent(int *pipefd, pid_t pid1, pid_t pid2)
 {
-	if (cmd)
-	{
-		if (cmd->args)
-			free_2d(cmd->args);
-		if (cmd->cmd_path)
-			free(cmd->cmd_path);
-		free(cmd);
-	}
+	close(pipefd[0]);
+	close(pipefd[1]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
 }

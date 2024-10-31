@@ -3,52 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/29 12:12:38 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/31 10:21:58 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "commands.h"
+#include "minishell.h"
 #include "shell.h"
 
-void	shell_loop(char **envp, pid_t pid)
+int	shell_loop(char **envp, pid_t pid)
 {
 	char		*input;
 	static char	**env = NULL;
 
 	if (!env)
 		env = envp;
-	while (1) // Loop para esperar nueva entrada
+	while (1)
 	{
 		ft_printf(PROMPT);
-		input = get_next_line(0);
+		input = get_next_line(1);
 		if (!input)
-		{
-			ft_printf("exit\n");
-			break ;
-		}
-		process_input(input, env);
-		free_null((void *)&input);
-		ft_successful("Shell loop ended", 0);
-		send_signal(pid, SIGUSR1); // Manda señal al padre
-		pause();                   // Espera señal del padre para continuar
+			continue ;
+		if (!process_input(input, env, pid))
+			return (free_null((void *)&input), 0);
+		pause();
 	}
 }
 
-void	process_input(char *input, char **envp)
+int	process_input(char *input, char **envp, pid_t pid)
 {
-	t_command *cmd;
+	t_command	*cmd;
 
+	if (!input || !*input)
+		return (0);
 	input[strcspn(input, "\n")] = 0;
 	cmd = parse_command(input, envp);
 	if (cmd)
 	{
-		execute_command(cmd);
-		free_command(cmd);
+		pid = fork();
+		if (pid < 0)
+			return (ft_error("Failed to fork\n", 0), 0);
+		if (pid == 0)
+		{
+			execute_command(cmd);
+			free_command(&cmd);
+		}
+		free_command(&cmd);
 	}
 	else
-		ft_error("Failed to parse command", 1);
+		return (ft_error("Failed to parse command\n", 0), 0);
+	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/29 13:23:34 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/31 10:19:59 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,8 @@ int	main(int argc, char **argv, char **envp)
 	}
 	if (!init_memory(&mem, argc, argv, envp))
 		ft_error("Error in memory allocation\n", 0);
+	sigaction_setup(sigaction_handler);
+	if (!shell_loop(envp, getpid()))
+		return (clean_up(&mem), ft_error("Error in shell loop\n", 0), 1);	
 	return (clean_up(&mem), ft_successful(SUCCESS, 1), 0);
 }
