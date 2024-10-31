@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/31 12:23:13 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:59:15 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 typedef struct s_data
 {
 	t_command		*command;
-    pid_t           pid;
+	pid_t			pid;
+	t_list			*list;
 }					t_data;
 
 typedef struct s_tree
@@ -27,10 +28,12 @@ typedef struct s_tree
 	t_data			*data;
 	struct s_tree	*left;
 	struct s_tree	*right;
+	t_list			*list;
 }					t_tree;
 
 typedef struct s_node
 {
+	t_list			*list;
 	t_tree			*tree;
 	t_data			*data;
 	struct s_node	*next;
@@ -38,10 +41,10 @@ typedef struct s_node
 
 typedef struct s_memory
 {
-	t_list			*list; // Lista de punteros a liberar [&]->[&]->[&]->[&] -> free ft_lstclear(&lst,free)
-	t_data			*data; // Datos de la shell [command, pid]
-	t_tree			*tree; // Árbol de datos [cat, priority]-> [ls -l, priority]-> [grep, priority]-> [>, priority]
-	t_node			*node; // Nodo de datos [cat]-> [ls -l]-> [grep]-> [>] -> [txt.txt]
+	t_list *list; // Lista de punteros a liberar [&]->[&]->[&]->[&]
+	t_data *data; // Datos de la shell [command, pid]
+	t_tree *tree; // Árbol de datos [cat, priority]-> [ls -l, priority]-> [grep,
+	t_node *node; // Nodo de datos [cat]-> [ls -l]-> [grep]-> [>] -> [txt.txt]
 	char			**envp;
 	char			**av;
 	int				ac;
