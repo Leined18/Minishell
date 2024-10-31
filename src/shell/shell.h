@@ -7,8 +7,8 @@
 
 // Declare your function prototypes here
 int			clean_up(t_memory *mem);
-void		process_input(char *input, char **envp);
-void		shell_loop(char **envp, pid_t pid);
+int			process_input(char *input, char **envp, pid_t pid);
+int			shell_loop(char **envp, pid_t pid);
 
 // init.c
 int			init_memory(t_memory *mem, int ac, char **av, char **envp);
