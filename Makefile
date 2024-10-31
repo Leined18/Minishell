@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/10/31 10:36:34 by danpalac         ###   ########.fr        #
+#    Updated: 2024/10/31 11:19:21 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,13 +112,13 @@ SIGNALS_FILES := signal_handler signal_utils
 
 #==========FILES###===========================================================#
 
-SRC_FILES+=$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
+#SRC_FILES+=$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
 SRC_FILES+=$(addprefix $(COMMANDS_DIR), $(COMMANDS_FILES))
-SRC_FILES+=$(addprefix $(ENV_DIR), $(ENV_FILES))
-SRC_FILES+=$(addprefix $(ERRORS_DIR), $(ERRORS_FILES))
-SRC_FILES+=$(addprefix $(INPUT_DIR), $(INPUT_FILES))
-SRC_FILES+=$(addprefix $(INTERPRETER_DIR), $(INTERPRETER_FILES))
-SRC_FILES+=$(addprefix $(MEMORY_DIR), $(MEMORY_FILES))
+#SRC_FILES+=$(addprefix $(ENV_DIR), $(ENV_FILES))
+#SRC_FILES+=$(addprefix $(ERRORS_DIR), $(ERRORS_FILES))
+#SRC_FILES+=$(addprefix $(INPUT_DIR), $(INPUT_FILES))
+#SRC_FILES+=$(addprefix $(INTERPRETER_DIR), $(INTERPRETER_FILES))
+#SRC_FILES+=$(addprefix $(MEMORY_DIR), $(MEMORY_FILES))
 SRC_FILES+=$(addprefix $(SHELL_DIR), $(SHELL_FILES))
 SRC_FILES+=$(addprefix $(SIGNALS), $(SIGNALS_FILES))
 
@@ -139,8 +139,8 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
 
 $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
-	@echo -e "$(BOLD_CYAN)[$(BOLD_MAGENTA)$(NAME)$(BOLD_CYAN)] compiled!$(DEF_COLOR)"
-	@echo -e "$(BOLD_CYAN)------------\n| Done! 👌 |\n------------$(DEF_COLOR)"
+	@echo "$(BOLD_CYAN)[$(BOLD_MAGENTA)$(NAME)$(BOLD_CYAN)] compiled!$(DEF_COLOR)"
+	@echo "$(BOLD_CYAN)------------\n| Done! 👌 |\n------------$(DEF_COLOR)"
 
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)
@@ -148,12 +148,12 @@ $(LIBFT):
 clean:
 	@$(RM) -rf $(OBJ_DIR)
 	@make clean -sC $(LIBFT_DIR)
-	@echo -e "$(CYAN)[$(NAME)]:\tobject files $(GREEN) => Cleaned!$(DEF_COLOR)"
+	@echo "$(CYAN)[$(NAME)]:\tobject files $(GREEN) => Cleaned!$(DEF_COLOR)"
 
 fclean: clean
 	@$(RM) -rf $(NAME)
 	@make fclean -sC $(LIBFT_DIR)
-	@echo -e "$(CYAN)[$(NAME)]:\texec. files $(GREEN) => Cleaned!$(DEF_COLOR)"
+	@echo "$(CYAN)[$(NAME)]:\texec. files $(GREEN) => Cleaned!$(DEF_COLOR)"
 
 re: fclean all
 

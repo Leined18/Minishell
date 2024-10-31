@@ -9,6 +9,7 @@
                 "kind": "build",
                 "isDefault": true
             },
+			"args": ["all"],
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"

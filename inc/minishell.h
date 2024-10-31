@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/31 09:06:49 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:23:13 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ typedef struct s_node
 
 typedef struct s_memory
 {
-	t_list			*list;
-	t_data			*data;
-	t_tree			*tree;
-	t_node			*node;
+	t_list			*list; // Lista de punteros a liberar [&]->[&]->[&]->[&] -> free ft_lstclear(&lst,free)
+	t_data			*data; // Datos de la shell [command, pid]
+	t_tree			*tree; // Árbol de datos [cat, priority]-> [ls -l, priority]-> [grep, priority]-> [>, priority]
+	t_node			*node; // Nodo de datos [cat]-> [ls -l]-> [grep]-> [>] -> [txt.txt]
 	char			**envp;
 	char			**av;
 	int				ac;
-
 }					t_memory;
 
 # define PROMPT "minishell$ "

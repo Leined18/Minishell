@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:55:35 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/31 10:01:40 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:17:59 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	sigaction_handler(int signal, siginfo_t *info, void *context)
 	else if (signal == SIGINT)
 	{
 		printf("Exit\n");
-		printf("%p", context);
+		printf("%s\n", (char *)context);
 		exit(0);
 	}
 }

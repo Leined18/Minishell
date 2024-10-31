@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/31 09:14:16 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:49:01 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	init_data(t_data **data)
 
 static int	link_memory(t_memory *mem)
 {
-	
+	ft_hold_mem(3, &mem->list, &mem->data, &mem->tree, &mem->node);
 	mem->tree->data = mem->data;
 	mem->node->tree = mem->tree;
 	mem->node->data = mem->data;
