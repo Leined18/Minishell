@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/31 15:58:37 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:05:52 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ int	main(int argc, char **argv, char **envp)
 	}
 	if (!init_memory(&mem, argc, argv, envp))
 		return (clean_up(&mem), ft_error(ERROR, 0), 1);
+
+	t_command	*v;
+	v = malloc(sizeof(t_command));
+	v->command = malloc(sizeof(char) * 10);
+	ft_hold_mem(1, &mem.data->list, &v->command, &v);
 	/* sigaction_setup(sigaction_handler);
 	if (!shell_loop(envp, getpid()))
 	return (clean_up(&mem), ft_error(ERROR, 0), 1);*/
