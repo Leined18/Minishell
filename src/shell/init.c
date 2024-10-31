@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/29 12:13:36 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/31 09:14:16 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int	init_data(t_data **data)
 
 static int	link_memory(t_memory *mem)
 {
+	
 	mem->tree->data = mem->data;
 	mem->node->tree = mem->tree;
 	mem->node->data = mem->data;

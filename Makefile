@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/10/30 09:59:28 by danpalac         ###   ########.fr        #
+#    Updated: 2024/10/31 09:26:18 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ LIBFT_DIR		:= libft/
 LIBFT_INC		:= $(LIBFT_DIR)inc/
 
 BUILTINS_DIR	:= builtins/
-COMMANDS_DIR	:= commands/
+COMMANDS_DIR	:= cmd/
 ENV_DIR			:= env/
 ERRORS_DIR		:= errors/
 INPUT_DIR		:= input/
@@ -100,7 +100,8 @@ IFLAGS		:= -I$(INC) -I$(LIBFT_INC) -I$(INC_BUILINS) -I$(INC_COMMANDS) -I$(INC_EN
 
 
 BUILTINS_FILES :=
-COMMANDS_FILES := commands
+COMMANDS_FILES := ft_create_child ft_create_cmd ft_execmd ft_handle_parent ft_pipe_cmd ft_redirect_input ft_redirect_output\
+			ft_get_cmd_path ft_parse_cmd ft_free_command
 ENV_FILES :=
 ERRORS_FILES :=
 INPUT_FILES :=

@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   ft_handle_parent.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 11:23:35 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/31 09:09:28 by danpalac         ###   ########.fr       */
+/*   Created: 2024/10/15 12:55:40 by danpalac          #+#    #+#             */
+/*   Updated: 2024/10/31 09:27:19 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "commands.h"
 
-int	clean_up(t_memory *mem)
+void	handle_parent(int *pipefd, pid_t pid1, pid_t pid2)
 {
-	if (mem->list)
-		ft_lstclear(&mem->list, free);
-	if (mem->data)
-		free_null((void *)&mem->data);
-	if (mem->tree)
-		free_null((void *)&mem->tree);
-	if (mem->node)
-		free_null((void *)&mem->node);
-	return (1);
+	close(pipefd[0]);
+	close(pipefd[1]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
 }

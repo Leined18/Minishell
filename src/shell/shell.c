@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/30 10:20:03 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/31 09:39:52 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	process_input(char *input, char **envp)
 		free_command(&cmd);
 	}
 	else
-		ft_error("Failed to parse command", 1);
+		ft_error("Failed to parse command\n", 1);
 }

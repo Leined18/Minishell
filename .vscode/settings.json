@@ -70,7 +70,8 @@
 	"signals.h": "c",
 	"shell.h": "c",
 	"get_next_line.h": "c",
-	"ft_printf.h": "c"
+	"ft_printf.h": "c",
+	"commands.h": "c"
 },
 "C_Cpp.errorSquiggles": "disabled"
 }
