@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/10/31 11:19:21 by danpalac         ###   ########.fr        #
+#    Updated: 2024/11/02 15:16:50 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,15 +100,15 @@ IFLAGS		:= -I$(INC) -I$(LIBFT_INC) -I$(INC_BUILINS) -I$(INC_COMMANDS) -I$(INC_EN
 
 
 BUILTINS_FILES :=
-COMMANDS_FILES := ft_create_child ft_create_cmd ft_execmd ft_handle_parent ft_pipe_cmd ft_redirect_input ft_redirect_output\
-			ft_get_cmd_path ft_parse_cmd ft_free_command
+COMMANDS_FILES := ft_create_cmd ft_create_child ft_execmd ft_handle_parent ft_pipe_cmd ft_redirect_input ft_redirect_output ft_get_cmd_path ft_parse_cmd ft_free_command
 ENV_FILES :=
 ERRORS_FILES :=
 INPUT_FILES :=
 INTERPRETER_FILES :=
 MEMORY_FILES :=
-SHELL_FILES := main shell cleanup init
+SHELL_FILES := shell cleanup init
 SIGNALS_FILES := signal_handler signal_utils
+MAIN_FILES := main
 
 #==========FILES###===========================================================#
 
@@ -121,6 +121,7 @@ SRC_FILES+=$(addprefix $(COMMANDS_DIR), $(COMMANDS_FILES))
 #SRC_FILES+=$(addprefix $(MEMORY_DIR), $(MEMORY_FILES))
 SRC_FILES+=$(addprefix $(SHELL_DIR), $(SHELL_FILES))
 SRC_FILES+=$(addprefix $(SIGNALS), $(SIGNALS_FILES))
+SRC_FILES+=$(MAIN_FILES)
 
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
@@ -128,22 +129,19 @@ DEPS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 
 #==========RULES==============================================================#
 
--include $(DEPS)
-
 all: $(NAME)
-bonus: $(BONUS)
+
+-include $(DEPS)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
 	@$(MKDIR) $(dir $@)	
 	@$(CC) $(CFLAGS) $(IFLAGS) -MP -MMD -c $< -o $@
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(OBJS)
+	@make -sC $(LIBFT_DIR)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(BOLD_CYAN)[$(BOLD_MAGENTA)$(NAME)$(BOLD_CYAN)] compiled!$(DEF_COLOR)"
 	@echo "$(BOLD_CYAN)------------\n| Done! 👌 |\n------------$(DEF_COLOR)"
-
-$(LIBFT):
-	@make -sC $(LIBFT_DIR)
 
 clean:
 	@$(RM) -rf $(OBJ_DIR)
