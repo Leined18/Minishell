@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/02 15:17:10 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/02 15:26:33 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ int	main(int argc, char **argv, char **envp)
 	/* sigaction_setup(sigaction_handler);
 	if (!shell_loop(envp, getpid()))
 	return (clean_up(&mem), ft_error(ERROR, 0), 1);*/
-	printf("hola, World!\n");
 	return (clean_up(&mem), ft_successful(SUCCESS, 1), 0);
 }
