@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/01 14:53:39 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:03:34 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 typedef struct s_command
 {
-	char 			*name;
+	char 			*name; //LO MISMO?
 	void			(*func)(char **);
-	char			*command;
+	char			*command; //LO MISMO?
 	char			*cmd_path;
 	char			**args;
 }					t_command;
