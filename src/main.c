@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/02 15:26:33 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:48:56 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	main(int argc, char **argv, char **envp)
 	if (!init_memory(&mem, argc, argv, envp))
 		return (clean_up(&mem), ft_error(ERROR, 0), 1);
 	ft_hold_mem(1, &mem.data->list, &v);
-	/* sigaction_setup(sigaction_handler);
+	sigaction_setup(sigaction_handler);
 	if (!shell_loop(envp, getpid()))
-	return (clean_up(&mem), ft_error(ERROR, 0), 1);*/
+		return (clean_up(&mem), ft_error(ERROR, 0), 1);
 	return (clean_up(&mem), ft_successful(SUCCESS, 1), 0);
 }

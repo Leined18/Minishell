@@ -3,36 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/31 11:01:14 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/04 11:20:58 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "commands.h"
 #include "minishell.h"
 #include "shell.h"
-
-int	shell_loop(char **envp, pid_t pid)
-{
-	char		*input;
-	static char	**env = NULL;
-
-	if (!env)
-		env = envp;
-	while (1)
-	{
-		ft_printf(PROMPT);
-		input = get_next_line(1);
-		if (!input)
-			continue ;
-		if (!process_input(input, env, pid))
-			return (free_null((void *)&input), 0);
-		free_null((void *)&input);
-		pause();
-	}
-}
 
 int	process_input(char *input, char **envp, pid_t pid)
 {
@@ -54,4 +34,32 @@ int	process_input(char *input, char **envp, pid_t pid)
 	else
 		return (ft_error("Failed to parse command\n", 0), 0);
 	return (1);
+}
+
+int	shell_loop(char **envp, pid_t pid)
+{
+	char		*input;
+	static char	**env = NULL;
+
+	if (!env)
+		env = envp;
+	while (1)
+	{
+		// Muestra el prompt y espera la entrada del usuario
+		input = readline(PROMPT);
+		//Si no puede leer, liberamos historial y salimos con 0(error)
+		if (!input)
+			return (rl_clear_history(), 0);
+		// Si la entrada es "exit" salimos con 1 (correcto)
+		if (ft_strlen(input) == 4 && ft_strncmp(input, "exit", 4) == 0)
+			return (free_null((void *)&input), rl_clear_history(), 1);
+		// Si el usuario escribió algo, se agrega al historial y se procesa.
+		if (*input)
+		{
+			add_history(input);
+			process_input(input, env, pid);
+		}
+		//liberamos input para leer uno nuevo y que no se quede sin liberar.
+		free_null((void *)&input);
+	}
 }
