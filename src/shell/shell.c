@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/04 11:20:58 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:20:55 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	shell_loop(char **envp, pid_t pid)
 		if (*input)
 		{
 			add_history(input);
-			process_input(input, env, pid);
+			//$DIVIDIR ENTRADA EN COMANDOS (PARSEAR Y DEMAS)
+			process_input(input, env, pid); //$se encargará de hacer el bucle en todos los comandos (desde solo 1 a n)
 		}
 		//liberamos input para leer uno nuevo y que no se quede sin liberar.
 		free_null((void *)&input);
