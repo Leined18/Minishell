@@ -6,37 +6,33 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:47:06 by mvidal-h          #+#    #+#             */
-/*   Updated: 2024/11/04 18:47:56 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:39:46 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_num_args(char **args)
+int	cd_builtin(char *path)
 {
-	int	i;
+	char	*prev_path;
 
-	i = 0;
-	while(args[i])
-		i++;
-	return (i);
-
-}
-
-void	bltn_cd(t_command *cmd)
-{
-	int	num_args;
-
-	num_args = count_num_args(cmd->args);
-	ft_printf("numero de argumentos = %d\n");
-	if (!num_args)
+	//Obtener el directorio de trabajo actual (sera el anterior)
+	prev_path = getcwd(NULL, 0);
+	if (prev_path == NULL)
 	{
-
+		perror("getcwd");
+		return (1);
 	}
-	else if (num_args == 1)
+	ft_printf("%s es el directorio antiguo\n", prev_path);
+	// Si solo se ha escrito cd (sin ruta)
+	if (path == NULL)
+		path = getenv("HOME");
+	//Cambio de directorio
+	if(chdir(path) != 0)
 	{
-		
+		perror("cd");
+		return (2);
 	}
-	else
-		ft_error("cd: too many arguments", 0);
+		ft_printf("Estoy en %s\n", path);
+		return (free(prev_path), 0);
 }

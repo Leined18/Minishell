@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
+#    By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/02 15:16:50 by danpalac         ###   ########.fr        #
+#    Updated: 2024/11/05 12:35:45 by mvidal-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,7 @@ IFLAGS		:= -I$(INC) -I$(LIBFT_INC) -I$(INC_BUILINS) -I$(INC_COMMANDS) -I$(INC_EN
 #==========SOURCES============================================================#
 
 
-BUILTINS_FILES :=
+BUILTINS_FILES := cd
 COMMANDS_FILES := ft_create_cmd ft_create_child ft_execmd ft_handle_parent ft_pipe_cmd ft_redirect_input ft_redirect_output ft_get_cmd_path ft_parse_cmd ft_free_command
 ENV_FILES :=
 ERRORS_FILES :=
@@ -112,7 +112,7 @@ MAIN_FILES := main
 
 #==========FILES###===========================================================#
 
-#SRC_FILES+=$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
+SRC_FILES+=$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
 SRC_FILES+=$(addprefix $(COMMANDS_DIR), $(COMMANDS_FILES))
 #SRC_FILES+=$(addprefix $(ENV_DIR), $(ENV_FILES))
 #SRC_FILES+=$(addprefix $(ERRORS_DIR), $(ERRORS_FILES))

@@ -5,4 +5,6 @@
 
 #define HOLA "hola "
 
+int	cd_builtin(char *path);
+
 #endif // BUILTINS_H
