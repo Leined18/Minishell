@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
+#    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/02 15:16:50 by danpalac         ###   ########.fr        #
+#    Updated: 2024/11/06 13:40:59 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,7 +103,7 @@ BUILTINS_FILES :=
 COMMANDS_FILES := ft_create_cmd ft_create_child ft_execmd ft_handle_parent ft_pipe_cmd ft_redirect_input ft_redirect_output ft_get_cmd_path ft_parse_cmd ft_free_command
 ENV_FILES :=
 ERRORS_FILES :=
-INPUT_FILES :=
+INPUT_FILES := parser
 INTERPRETER_FILES :=
 MEMORY_FILES :=
 SHELL_FILES := shell cleanup init
@@ -116,7 +116,7 @@ MAIN_FILES := main
 SRC_FILES+=$(addprefix $(COMMANDS_DIR), $(COMMANDS_FILES))
 #SRC_FILES+=$(addprefix $(ENV_DIR), $(ENV_FILES))
 #SRC_FILES+=$(addprefix $(ERRORS_DIR), $(ERRORS_FILES))
-#SRC_FILES+=$(addprefix $(INPUT_DIR), $(INPUT_FILES))
+SRC_FILES+=$(addprefix $(INPUT_DIR), $(INPUT_FILES))
 #SRC_FILES+=$(addprefix $(INTERPRETER_DIR), $(INTERPRETER_FILES))
 #SRC_FILES+=$(addprefix $(MEMORY_DIR), $(MEMORY_FILES))
 SRC_FILES+=$(addprefix $(SHELL_DIR), $(SHELL_FILES))
