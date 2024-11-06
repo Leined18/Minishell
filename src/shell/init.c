@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/31 15:58:03 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:24:28 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "env.h"
 
 static int	init_node(t_node **node, t_list **lst)
 {
@@ -61,7 +62,7 @@ int	init_memory(t_memory *mem, int ac, char **av, char **envp)
 {
 	mem->ac = ac;
 	mem->av = av;
-	mem->envp = envp;
+	mem->envp = generate_copy_envp(envp); //modificada la estructura t_memory (mirar minishell.h). Ahora almacena la copia de envp, no un puntero a envp.
 	if (!init_data(&mem->data, &mem->list))
 		return (0);
 	if (!init_tree(&mem->tree, &mem->list))

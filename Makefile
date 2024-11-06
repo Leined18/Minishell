@@ -6,7 +6,7 @@
 #    By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/05 12:35:45 by mvidal-h         ###   ########.fr        #
+#    Updated: 2024/11/06 12:42:49 by mvidal-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,9 +99,9 @@ IFLAGS		:= -I$(INC) -I$(LIBFT_INC) -I$(INC_BUILINS) -I$(INC_COMMANDS) -I$(INC_EN
 #==========SOURCES============================================================#
 
 
-BUILTINS_FILES := cd
+BUILTINS_FILES := cd env
 COMMANDS_FILES := ft_create_cmd ft_create_child ft_execmd ft_handle_parent ft_pipe_cmd ft_redirect_input ft_redirect_output ft_get_cmd_path ft_parse_cmd ft_free_command
-ENV_FILES :=
+ENV_FILES := env_init
 ERRORS_FILES :=
 INPUT_FILES :=
 INTERPRETER_FILES :=
@@ -114,7 +114,7 @@ MAIN_FILES := main
 
 SRC_FILES+=$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
 SRC_FILES+=$(addprefix $(COMMANDS_DIR), $(COMMANDS_FILES))
-#SRC_FILES+=$(addprefix $(ENV_DIR), $(ENV_FILES))
+SRC_FILES+=$(addprefix $(ENV_DIR), $(ENV_FILES))
 #SRC_FILES+=$(addprefix $(ERRORS_DIR), $(ERRORS_FILES))
 #SRC_FILES+=$(addprefix $(INPUT_DIR), $(INPUT_FILES))
 #SRC_FILES+=$(addprefix $(INTERPRETER_DIR), $(INTERPRETER_FILES))

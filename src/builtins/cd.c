@@ -6,13 +6,13 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:47:06 by mvidal-h          #+#    #+#             */
-/*   Updated: 2024/11/05 12:39:46 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:19:47 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cd_builtin(char *path)
+int	cd_builtin(char *path) //En progreso.
 {
 	char	*prev_path;
 
