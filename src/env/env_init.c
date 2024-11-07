@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:49:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2024/11/07 12:43:19 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:25:45 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	copy_envp(t_env **environ, char **envp, t_list **list)
 		(*environ)->env[counter] = ft_strdup(envp[counter]);
 	(*environ)->path = split_path_env((*environ)->env);
 	ft_hold_mem(3, list, &(*environ), &(*environ)->env, &(*environ)->path);
-	(lst_add_2d(list, (*environ)->env), lst_add_2d(list, (*environ)->path));
+	(ft_lstadd_2d(list, (*environ)->env), ft_lstadd_2d(list, (*environ)->path));
 	return (1);
 }
