@@ -4,6 +4,8 @@
 // Include any necessary headers here
 # include "config.h"
 # include "minishell.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 
 // Declare your function prototypes here
 int			clean_up(t_memory *mem);
