@@ -5,4 +5,7 @@
 
 #define HOLA "hola "
 
+int		cd_builtin(char *path);
+void	env_builtin(char **env);
+
 #endif // BUILTINS_H
