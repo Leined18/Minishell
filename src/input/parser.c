@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:33:24 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/06 13:41:38 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:53:49 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+
+int 
 
 int	parse_arguments(t_memory *mem, int ac, char **av, char **ev)
 {
@@ -21,5 +23,6 @@ int	parse_arguments(t_memory *mem, int ac, char **av, char **ev)
 	}
 	if (!init_memory(mem, ac, av, ev))
 		return (0);
+	
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/06 13:40:46 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:16:47 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main(int argc, char **argv, char **envp)
 	mem = (t_memory){0};
 	if (!parse_arguments(&mem, argc, argv, envp))
 		return (clean_up(&mem), ft_error(ERROR, 0), 1);
+	
 	return (clean_up(&mem), ft_successful(SUCCESS, 0), 0);
 }
