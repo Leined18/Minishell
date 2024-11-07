@@ -1,8 +1,8 @@
 #ifndef COMMANDS_H
 # define COMMANDS_H
 
-# include "minishell.h"
 # include "config.h"
+# include "minishell.h"
 // Include any necessary headers here
 
 // Declare your function prototypes here
@@ -19,7 +19,7 @@ void		create_child(t_command *cmd, int *pipefd, int child_num);
 void		pipe_commands(t_command *cmd1, t_command *cmd2);
 void		handle_parent(int *pipefd, pid_t pid1, pid_t pid2);
 char		*get_cmd_path(char *cmd, char **envp);
-t_command	*parse_command(char *input, char **environ);
+t_command	*parse_command(char *input, char **environ, t_list **lst);
 void		free_command(t_command **cmd);
 
 /* // Builtin functions

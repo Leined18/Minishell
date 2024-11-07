@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/04 17:20:55 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:46:54 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 #include "minishell.h"
 #include "shell.h"
 
-int	process_input(char *input, char **envp, pid_t pid)
+int	process_input(char *input, t_data *data)
 {
 	t_command	*cmd;
 
 	if (!input || !*input)
 		return (0);
 	input[strcspn(input, "\n")] = 0;
-	cmd = parse_command(input, envp);
+	cmd = parse_command(input, data->envp->env, &data->list);
 	if (cmd)
 	{
-		pid = fork();
-		if (pid < 0)
+		data->pid = fork();
+		if (data->pid < 0)
 			return (ft_error("Failed to fork\n", 0), 0);
-		if (pid == 0)
+		if (data->pid == 0)
+		{
 			execute_command(cmd);
+		}
 		free_command(&cmd);
 	}
 	else
@@ -36,18 +38,15 @@ int	process_input(char *input, char **envp, pid_t pid)
 	return (1);
 }
 
-int	shell_loop(char **envp, pid_t pid)
+int	shell_loop(t_memory *mem)
 {
-	char		*input;
-	static char	**env = NULL;
+	char	*input;
 
-	if (!env)
-		env = envp;
 	while (1)
 	{
 		// Muestra el prompt y espera la entrada del usuario
 		input = readline(PROMPT);
-		//Si no puede leer, liberamos historial y salimos con 0(error)
+		// Si no puede leer, liberamos historial y salimos con 0(error)
 		if (!input)
 			return (rl_clear_history(), 0);
 		// Si la entrada es "exit" salimos con 1 (correcto)
@@ -58,9 +57,11 @@ int	shell_loop(char **envp, pid_t pid)
 		{
 			add_history(input);
 			//$DIVIDIR ENTRADA EN COMANDOS (PARSEAR Y DEMAS)
-			process_input(input, env, pid); //$se encargará de hacer el bucle en todos los comandos (desde solo 1 a n)
+			process_input(input, mem->data);
+			//$se encargará de hacer el bucle en todos los comandos (desde solo 1 a n)
 		}
-		//liberamos input para leer uno nuevo y que no se quede sin liberar.
+		// liberamos input para leer uno nuevo y que no se quede sin liberar.
 		free_null((void *)&input);
+		pause();
 	}
 }

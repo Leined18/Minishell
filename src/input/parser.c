@@ -6,15 +6,16 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:33:24 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/07 11:12:55 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:07:15 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "commands.h"
 #include "input.h"
 
 int	parse_arguments(t_memory *mem, int ac, char **av, char **ev)
 {
-	if (ac >= 2)
+	if (ac >= 3)
 	{
 		write(1, "Usage: ./minishell\n", 19);
 		return (0);

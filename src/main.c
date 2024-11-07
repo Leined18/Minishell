@@ -6,10 +6,8 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/07 14:26:41 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:45:48 by danpalac         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
-
 /* ************************************************************************** */
 
 #include "builtins.h"
@@ -26,9 +24,8 @@ int	main(int argc, char **argv, char **envp)
 	mem = (t_memory){0};
 	if (!parse_arguments(&mem, argc, argv, envp))
 		return (clean_up(&mem), ft_error(ERROR, 0), 0);
-	/* cd_builtin(NULL);
-	env_builtin(mem.data->envp->env);
-	ft_printf("\n\n");
-	env_builtin(mem.data->envp->path); */
+	sigaction_setup(&sigaction_handler);
+	if (!shell_loop(&mem))
+		return (clean_up(&mem), ft_error(ERROR, 0), 0);
 	return (clean_up(&mem), ft_successful(SUCCESS, 1), 0);
 }
