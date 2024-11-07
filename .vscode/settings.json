@@ -71,7 +71,9 @@
 	"shell.h": "c",
 	"get_next_line.h": "c",
 	"ft_printf.h": "c",
-	"commands.h": "c"
+	"commands.h": "c",
+	"input.h": "c",
+	"list": "c"
 },
-"C_Cpp.errorSquiggles": "disabled"
+  "C_Cpp.errorSquiggles": "disabled"
 }

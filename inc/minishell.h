@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/01 14:53:39 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:08:04 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,23 @@
 
 typedef struct s_command
 {
-	char 			*name;
+	char			*name;
 	void			(*func)(char **);
 	char			*command;
 	char			*cmd_path;
 	char			**args;
 }					t_command;
 
+typedef struct s_env
+{
+	char			**env;
+	char			**path;
+	int				num_env;
+}					t_env;
+
 typedef struct s_data
 {
-	t_command		*command;
+	t_env			*envp;
 	pid_t			pid;
 	t_list			*list;
 }					t_data;
@@ -45,6 +52,7 @@ typedef struct s_node
 	t_list			*list;
 	t_tree			*tree;
 	t_data			*data;
+	t_command		*command;
 	struct s_node	*next;
 }					t_node;
 
@@ -54,7 +62,6 @@ typedef struct s_memory
 	t_data *data; // Datos de la shell [command, pid]
 	t_tree *tree; // Árbol de datos [cat, priority]-> [ls -l, priority]-> [grep,
 	t_node *node; // Nodo de datos [cat]-> [ls -l]-> [grep]-> [>] -> [txt.txt]
-	char			**envp;
 	char			**av;
 	int				ac;
 }					t_memory;
