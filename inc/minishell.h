@@ -6,11 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/11/07 15:43:34 by danpalac         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/08 17:06:33 by danpalac         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2024/11/09 00:02:57 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +37,7 @@ typedef struct s_data
 	t_env			*envp;
 	pid_t			pid;
 	t_list			*list;
+	t_ref			**ref;
 }					t_data;
 
 typedef struct s_tree
@@ -49,10 +46,12 @@ typedef struct s_tree
 	struct s_tree	*left;
 	struct s_tree	*right;
 	t_list			*list;
+	t_ref 			**ref;
 }					t_tree;
 
 typedef struct s_node
 {
+	t_ref 			**ref;
 	t_list			*list;
 	t_tree			*tree;
 	t_data			*data;
@@ -66,7 +65,7 @@ typedef struct s_memory
 	t_data *data; // Datos de la shell [command, pid]
 	t_tree *tree; // Árbol de datos [cat, priority]-> [ls -l, priority]-> [grep,
 	t_node *node; // Nodo de datos [cat]-> [ls -l]-> [grep]-> [>] -> [txt.txt]
-	t_ref 	*ref;   // Referencia a datos [env, path]
+	t_ref 	**ref;   // Referencia a datos [env, path]
 	char			**av;
 	int				ac;
 }					t_memory;

@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/07 15:46:54 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/08 23:56:48 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	shell_loop(t_memory *mem)
 			return (rl_clear_history(), 0);
 		// Si la entrada es "exit" salimos con 1 (correcto)
 		if (ft_strlen(input) == 4 && ft_strncmp(input, "exit", 4) == 0)
-			return (free_null((void *)&input), rl_clear_history(), 1);
+			return (free_null((void **)&input), rl_clear_history(), 1);
 		// Si el usuario escribió algo, se agrega al historial y se procesa.
 		if (*input)
 		{
@@ -61,7 +61,7 @@ int	shell_loop(t_memory *mem)
 			//$se encargará de hacer el bucle en todos los comandos (desde solo 1 a n)
 		}
 		// liberamos input para leer uno nuevo y que no se quede sin liberar.
-		free_null((void *)&input);
+		free_null((void **)&input);
 		pause();
 	}
 }

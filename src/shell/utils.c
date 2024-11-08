@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:14:31 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/08 17:39:46 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/08 23:38:23 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strdup_ref(const char *src, t_ref **ref, char *name)
 	new_ref = ft_refnew((void **)&str, name, STRING);
 	if (!new_ref)
 		return (free_null((void **)&str), NULL);
-	ft_refadd(ref, &new_ref, NULL);
+	ft_refadd_front(ref, new_ref);
 	return (str);
 }
 
@@ -47,7 +47,7 @@ void	*ft_calloc_ref(int count, size_t size, t_ref **ref, char *name)
 	(ft_bzero(memory, count * size), new_ref = ft_refnew(&memory, name, type));
 	if (!new_ref)
 		return (free_null(&memory), NULL);
-	ft_refadd(ref, &new_ref, NULL);
+	ft_refadd_front(ref, new_ref);
 	return (memory);
 }
 

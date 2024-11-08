@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:49:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2024/11/08 18:09:08 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/08 23:40:26 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char	**split_path_env(char *env[], t_ref **ref)
 		path_array = ft_split(path, ':');
 		i = 0;
 	}
-	ft_refadd_back(ref, ft_refnew((void **)&(path_array), "path_env", STRING_ARRAY));
+	ft_refadd_front(ref, ft_refnew((void **)&(path_array), "path_env",
+			STRING_ARRAY));
 	return (path_array);
 }
 
