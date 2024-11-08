@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+         #
+#    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/07 13:18:47 by mvidal-h         ###   ########.fr        #
+#    Updated: 2024/11/08 17:25:59 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ ERRORS_FILES :=
 INPUT_FILES := parser
 INTERPRETER_FILES :=
 MEMORY_FILES :=
-SHELL_FILES := shell cleanup init
+SHELL_FILES := shell cleanup init utils
 SIGNALS_FILES := signal_handler signal_utils
 MAIN_FILES := main
 
