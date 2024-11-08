@@ -73,7 +73,9 @@
 	"ft_printf.h": "c",
 	"commands.h": "c",
 	"input.h": "c",
-	"list": "c"
+	"list": "c",
+	"env.h": "c",
+	"history.h": "c"
 },
   "C_Cpp.errorSquiggles": "disabled"
 }
