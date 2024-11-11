@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/11 12:25:16 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/11 13:15:35 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,6 @@
 # include "libft.h"
 # include "exe.h"
 
-typedef struct s_command
-{
-	char			*name;
-	void			(*func)(char **);
-	char			*command;
-	char			*cmd_path;
-	char			**args;
-}					t_command;
 
 typedef struct s_data
 {
