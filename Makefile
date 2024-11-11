@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/11 12:14:48 by danpalac         ###   ########.fr        #
+#    Updated: 2024/11/11 14:32:25 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,10 +77,11 @@ MEMTRACK_DIR	:= $(SUBMODULES)memtrack/
 SHELL_DIR		:= shell/
 
 
-INC_PARSE		:= $(PARSE_DIR)inc/
-INC_EXE			:= $(EXE_DIR)inc/
-INC_MEMTRACK	:= $(MEMTRACK_DIR)inc/
-LIBFT_INC		:= $(LIBFT_DIR)inc/
+INC_PARSE		:= $(PARSE_DIR)$(OBJ_DIR)$(INC)
+INC_EXE			:= $(EXE_DIR)$(OBJ_DIR)$(INC)
+INC_MEMTRACK	:= $(MEMTRACK_DIR)$(OBJ_DIR)$(INC)
+INC_SHELL		:= $(SRC_DIR)$(SHELL_DIR)
+LIBFT_INC		:= $(LIBFT_DIR)$(INC)
 
 #==========COMMANDS============================================================#
 
@@ -91,13 +92,13 @@ AR			:= ar rcs
 LIB			:= ranlib
 MKDIR 		:= mkdir -p
 LDFLAGS		:= -L$(LIBFT_DIR) -L$(EXE_DIR) -L$(PARSE_DIR) -lft -lm -fsanitize=address
-IFLAGS		:= -I$(INC) -I$(LIBFT_INC) -I$(INC_PARSE) -I$(INC_EXE) -I$(INC_MEMTRACK)
+IFLAGS		:= -I$(INC) -I$(LIBFT_INC) -I$(INC_PARSE) -I$(INC_EXE) -I$(INC_MEMTRACK) -I$(INC_SHELL)
 RDLFLAG		:= -lreadline
 
 #==========SOURCES============================================================#
 
 
-SHELL_FILES		:= cleanup init shell utils
+SHELL_FILES		:= cleanup init #shell utils
 MAIN_FILES		:= main
 
 #==========FILES###===========================================================#
@@ -119,18 +120,18 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
 	@$(MKDIR) $(dir $@)	
 	@$(CC) $(CFLAGS) $(IFLAGS) -MP -MMD -c $< -o $@
 
-$(NAME): $(OBJS) $(LIBFT) $(EXE) $(PARSE)
+$(NAME): $(LIBFT) $(EXE) $(PARSE) $(OBJS) 
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) $(RDLFLAG)
 	@echo "$(BOLD_CYAN)[$(BOLD_MAGENTA)$(NAME)$(BOLD_CYAN)] compiled!$(DEF_COLOR)"
 	@echo "$(BOLD_CYAN)------------\n| Done! 👌 |\n------------$(DEF_COLOR)"
 
-$(EXE): $(EXE_LIB)
+$(EXE): 
 	@make -sC $(EXE_DIR)
 
-$(PARSE): $(PARSE_LIB)
+$(PARSE): 
 	@make -sC $(PARSE_DIR)
 
-$(LIBFT): $(LIBFT_LIB)
+$(LIBFT):
 	@make -sC $(LIBFT_DIR)
 
 clean:
@@ -139,7 +140,10 @@ clean:
 	@echo "$(CYAN)[$(NAME)]:\tobject files $(GREEN) => Cleaned!$(DEF_COLOR)"
 
 fclean: clean
-	@$(RM) -rf $(NAME)
+	@$(RM) -rf $(NAME) 
+	@make fclean -sC $(EXE_DIR)
+	@make fclean -sC $(PARSE_DIR)
+	@make fclean -sC $(MEMTRACK_DIR)
 	@make fclean -sC $(LIBFT_DIR)
 	@echo "$(CYAN)[$(NAME)]:\texec. files $(GREEN) => Cleaned!$(DEF_COLOR)"
 

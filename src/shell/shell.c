@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/08 23:56:48 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/11 14:26:39 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "commands.h"
-#include "minishell.h"
 #include "shell.h"
 
 int	process_input(char *input, t_data *data)
@@ -21,7 +19,7 @@ int	process_input(char *input, t_data *data)
 	if (!input || !*input)
 		return (0);
 	input[strcspn(input, "\n")] = 0;
-	cmd = parse_command(input, data->envp->env, &data->list);
+	cmd = parse_command(input, NULL, &data->list);
 	if (cmd)
 	{
 		data->pid = fork();
