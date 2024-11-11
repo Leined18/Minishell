@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
+#    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/08 17:25:59 by danpalac         ###   ########.fr        #
+#    Updated: 2024/11/11 11:06:34 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ RM			:= rm -rf
 AR			:= ar rcs
 LIB			:= ranlib
 MKDIR 		:= mkdir -p
-LDFLAGS		:= -L$(LIBFT_DIR) -lft -lm -fsanitize=address
+LDFLAGS		:= -L$(LIBFT_DIR) -L$(EXE_DIR) -lft -lm -fsanitize=address
 IFLAGS		:= -I$(INC) -I$(LIBFT_INC) -I$(INC_BUILINS) -I$(INC_COMMANDS) -I$(INC_ENV) -I$(INC_ERRORS) -I$(INC_INPUT) -I$(INC_INTERPRETER) -I$(INC_MEMORY) -I$(INC_SHELL) -I$(INC_SIGNALS)
 RDLFLAG		:= -lreadline
 

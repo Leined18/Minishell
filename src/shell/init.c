@@ -6,12 +6,13 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/08 17:38:57 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:04:36 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "shell.h"
+#define TOTAL_REFS 3
 
 static int	init_node(t_node **node, t_ref **ref)
 {
@@ -36,15 +37,19 @@ static int	init_data(t_data **data, t_ref **ref)
 	return (1);
 }
 
-static int	link_memory(t_memory *mem)
+static int	link_memory(t_memory *mem, t_ref **ref, int i)
 {
 	mem->tree->data = mem->data;
 	mem->node->tree = mem->tree;
 	mem->node->data = mem->data;
-	ft_lstadd_ref(&mem->list, mem->ref);
+	while (i < TOTAL_REFS)
+		ft_lstadd_ref(&mem->list, ref[i++]);
 	mem->data->list = mem->list;
 	mem->tree->list = mem->list;
 	mem->node->list = mem->list;
+	mem->data->ref = mem->ref;
+	mem->tree->ref = mem->ref;
+	mem->node->ref = mem->ref;
 	return (1);
 }
 
@@ -52,15 +57,16 @@ int	init_memory(t_memory *mem, int ac, char **av, char **envp)
 {
 	mem->ac = ac;
 	mem->av = av;
-	if (!init_data(&mem->data, &mem->ref))
+	mem->ref = ft_calloc(TOTAL_REFS, sizeof(t_ref *));
+	if (!init_data(&mem->data, &mem->ref[0]))
 		return (0);
-	if (!copy_envp(&mem->data->envp, envp, &mem->ref))
+	if (!copy_envp(&mem->data->envp, envp, &mem->ref[0]))
 		return (0);
-	if (!init_tree(&mem->tree, &mem->ref))
+	if (!init_tree(&mem->tree, &mem->ref[1]))
 		return (0);
-	if (!init_node(&mem->node, &mem->ref))
+	if (!init_node(&mem->node, &mem->ref[2]))
 		return (0);
-	if (!link_memory(mem))
+	if (!link_memory(mem, mem->ref, 0))
 		return (0);
 	return (1);
 }

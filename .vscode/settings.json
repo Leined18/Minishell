@@ -74,8 +74,12 @@
 	"commands.h": "c",
 	"input.h": "c",
 	"list": "c",
+<<<<<<< HEAD
+	"readline.h": "c"
+=======
 	"env.h": "c",
 	"history.h": "c"
+>>>>>>> main
 },
   "C_Cpp.errorSquiggles": "disabled"
 }
