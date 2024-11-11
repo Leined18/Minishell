@@ -1,12 +1,12 @@
-[submodule "libft"]
-	path = libft
-	url = git@github.com:Leined18/Libft.git
-[submodule "src/exe"]
-	path = src/exe
+[submodule "submodules/exe"]
+	path = submodules/exe
 	url = git@github.com:Leined18/execution.git
-[submodule "src/parse"]
-	path = src/parse
+[submodule "submodules/parse"]
+	path = submodules/parse
 	url = git@github.com:Leined18/parser.git
-[submodule "src/memtrack"]
-	path = src/memtrack
+[submodule "submodules/memtrack"]
+	path = submodules/memtrack
 	url = git@github.com:Leined18/memtrack.git
+[submodule "submodules/libft"]
+	path = submodules/libft
+	url = git@github.com:Leined18/Libft.git

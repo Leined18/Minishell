@@ -6,18 +6,11 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/11 11:11:58 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/11 12:26:19 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
-#include "config.h"
-#include "input.h"
 #include "minishell.h"
-#include "shell.h"
-#include "signals.h"
-
-
 
 int	main(int argc, char **argv, char **envp)
 {
