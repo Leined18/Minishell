@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/11 11:06:34 by danpalac         ###   ########.fr        #
+#    Updated: 2024/11/11 12:14:48 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,35 +54,33 @@ MOVE_UP     = \033[1A
 #==========NAMES===============================================================#
 
 NAME		:= minishell
-LIBFT		:= $(LIBFT_DIR)libft.a
+PARSE_LIB	:= parse.a
+EXE_LIB		:= exe.a
+LIBFT_LIB	:= libft.a
+
+LIBFT		:= $(LIBFT_DIR)$(LIBFT_LIB)
+EXE 		:= $(EXE_DIR)$(EXE_LIB)
+PARSE		:= $(PARSE_DIR)$(PARSE_LIB)
 
 #==========DIRECTORIES=======================================================#
 
+SUBMODULES		:= submodules/
 INC 			:= inc/
 SRC_DIR 		:= src/
 OBJ_DIR 		:= obj/
-LIBFT_DIR		:= libft/
-LIBFT_INC		:= $(LIBFT_DIR)inc/
 
-BUILTINS_DIR	:= builtins/
-COMMANDS_DIR	:= cmd/
-ENV_DIR			:= env/
-ERRORS_DIR		:= errors/
-INPUT_DIR		:= input/
-INTERPRETER_DIR	:= interpreter/
-MEMORY_DIR		:= memory/
+
+LIBFT_DIR		:= $(SUBMODULES)libft/
+EXE_DIR			:= $(SUBMODULES)exe/
+PARSE_DIR		:= $(SUBMODULES)parse/
+MEMTRACK_DIR	:= $(SUBMODULES)memtrack/
 SHELL_DIR		:= shell/
-SIGNALS 		:= signals/
 
-INC_BUILINS		:= $(SRC_DIR)$(BUILTINS_DIR)
-INC_COMMANDS	:= $(SRC_DIR)$(COMMANDS_DIR)
-INC_ENV			:= $(SRC_DIR)$(ENV_DIR)
-INC_ERRORS		:= $(SRC_DIR)$(ERRORS_DIR)
-INC_INPUT		:= $(SRC_DIR)$(INPUT_DIR)
-INC_INTERPRETER	:= $(SRC_DIR)$(INTERPRETER_DIR)
-INC_MEMORY		:= $(SRC_DIR)$(MEMORY_DIR)
-INC_SHELL		:= $(SRC_DIR)$(SHELL_DIR)
-INC_SIGNALS		:= $(SRC_DIR)$(SIGNALS)
+
+INC_PARSE		:= $(PARSE_DIR)inc/
+INC_EXE			:= $(EXE_DIR)inc/
+INC_MEMTRACK	:= $(MEMTRACK_DIR)inc/
+LIBFT_INC		:= $(LIBFT_DIR)inc/
 
 #==========COMMANDS============================================================#
 
@@ -92,35 +90,19 @@ RM			:= rm -rf
 AR			:= ar rcs
 LIB			:= ranlib
 MKDIR 		:= mkdir -p
-LDFLAGS		:= -L$(LIBFT_DIR) -L$(EXE_DIR) -lft -lm -fsanitize=address
-IFLAGS		:= -I$(INC) -I$(LIBFT_INC) -I$(INC_BUILINS) -I$(INC_COMMANDS) -I$(INC_ENV) -I$(INC_ERRORS) -I$(INC_INPUT) -I$(INC_INTERPRETER) -I$(INC_MEMORY) -I$(INC_SHELL) -I$(INC_SIGNALS)
+LDFLAGS		:= -L$(LIBFT_DIR) -L$(EXE_DIR) -L$(PARSE_DIR) -lft -lm -fsanitize=address
+IFLAGS		:= -I$(INC) -I$(LIBFT_INC) -I$(INC_PARSE) -I$(INC_EXE) -I$(INC_MEMTRACK)
 RDLFLAG		:= -lreadline
 
 #==========SOURCES============================================================#
 
 
-BUILTINS_FILES := cd env
-COMMANDS_FILES := ft_create_cmd ft_create_child ft_execmd ft_handle_parent ft_pipe_cmd ft_redirect_input ft_redirect_output ft_get_cmd_path ft_parse_cmd ft_free_command
-ENV_FILES := env_init
-ERRORS_FILES :=
-INPUT_FILES := parser
-INTERPRETER_FILES :=
-MEMORY_FILES :=
-SHELL_FILES := shell cleanup init utils
-SIGNALS_FILES := signal_handler signal_utils
-MAIN_FILES := main
+SHELL_FILES		:= cleanup init shell utils
+MAIN_FILES		:= main
 
 #==========FILES###===========================================================#
 
-SRC_FILES+=$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
-SRC_FILES+=$(addprefix $(COMMANDS_DIR), $(COMMANDS_FILES))
-SRC_FILES+=$(addprefix $(ENV_DIR), $(ENV_FILES))
-#SRC_FILES+=$(addprefix $(ERRORS_DIR), $(ERRORS_FILES))
-SRC_FILES+=$(addprefix $(INPUT_DIR), $(INPUT_FILES))
-#SRC_FILES+=$(addprefix $(INTERPRETER_DIR), $(INTERPRETER_FILES))
-#SRC_FILES+=$(addprefix $(MEMORY_DIR), $(MEMORY_FILES))
 SRC_FILES+=$(addprefix $(SHELL_DIR), $(SHELL_FILES))
-SRC_FILES+=$(addprefix $(SIGNALS), $(SIGNALS_FILES))
 SRC_FILES+=$(MAIN_FILES)
 
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
@@ -137,11 +119,19 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
 	@$(MKDIR) $(dir $@)	
 	@$(CC) $(CFLAGS) $(IFLAGS) -MP -MMD -c $< -o $@
 
-$(NAME): $(OBJS)
-	@make -sC $(LIBFT_DIR)
+$(NAME): $(OBJS) $(LIBFT) $(EXE) $(PARSE)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) $(RDLFLAG)
 	@echo "$(BOLD_CYAN)[$(BOLD_MAGENTA)$(NAME)$(BOLD_CYAN)] compiled!$(DEF_COLOR)"
 	@echo "$(BOLD_CYAN)------------\n| Done! 👌 |\n------------$(DEF_COLOR)"
+
+$(EXE): $(EXE_LIB)
+	@make -sC $(EXE_DIR)
+
+$(PARSE): $(PARSE_LIB)
+	@make -sC $(PARSE_DIR)
+
+$(LIBFT): $(LIBFT_LIB)
+	@make -sC $(LIBFT_DIR)
 
 clean:
 	@$(RM) -rf $(OBJ_DIR)

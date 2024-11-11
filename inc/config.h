@@ -2,7 +2,6 @@
 # define CONFIG_H
 
 // Include any necessary headers here
-# include "signals.h"
 
 // Macros para funciones y operaciones
 # define SQUARE(x) ((x) * (x))     // Devuelve el cuadrado de x
