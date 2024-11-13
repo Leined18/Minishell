@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/13 10:30:20 by danpalac         ###   ########.fr        #
+#    Updated: 2024/11/13 13:06:44 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,11 +66,11 @@ INC 			:= inc/
 SRC_DIR 		:= src/
 OBJ_DIR 		:= obj/
 
-
 LIBFT_DIR		:= $(SUBMODULES)libft/
 EXE_DIR			:= $(SUBMODULES)exe/
 PARSE_DIR		:= $(SUBMODULES)parse/
 MEMTRACK_DIR	:= $(SUBMODULES)memtrack/
+LIB_DIR			:= $(SUBMODULES)lib
 SHELL_DIR		:= shell/
 
 LIBFT		:= $(LIBFT_DIR)$(LIBFT_LIB)
@@ -92,8 +92,8 @@ RM			:= rm -rf
 AR			:= ar rcs
 LIB			:= ranlib
 MKDIR 		:= mkdir -p
-LDFLAGS		:= -L$(LIBFT_DIR) -L$(MEMTRACK_DIR) -L$(EXE_DIR) -L$(PARSE_DIR) -lft -lm -fsanitize=address
-IFLAGS		:= -I$(LIBFT_INC) -I$(INC_MEMTRACK) -I$(INC) -I$(INC_SHELL) -I$(INC_PARSE) -I$(INC_EXE)
+LDFLAGS		:= -L$(LIB_DIR) -lmemtrack -lexe -lft -g3 -fsanitize=address
+IFLAGS		:= -I$(LIB_DIR)/ -I$(INC) -I$(INC_SHELL)
 RDLFLAG		:= -lreadline
 
 #==========SOURCES============================================================#
@@ -121,8 +121,8 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
 	@$(MKDIR) $(dir $@)	
 	@$(CC) $(CFLAGS) $(IFLAGS) -MP -MMD -c $< -o $@
 
-$(NAME): $(LIBFT) $(MEMTRACK) $(EXE) $(PARSE) $(OBJS) 
-	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) $(RDLFLAG)
+$(NAME): $(LIBFT) $(MEMTRACK) $(EXE) $(OBJS) 
+	@$(CC) $(CFLAGS) $(OBJS) $(RDLFLAG) $(LDFLAGS) -o $(NAME)
 	@echo "$(BOLD_CYAN)[$(BOLD_MAGENTA)$(NAME)$(BOLD_CYAN)] compiled!$(DEF_COLOR)"
 	@echo "$(BOLD_CYAN)------------\n| Done! 👌 |\n------------$(DEF_COLOR)"
 

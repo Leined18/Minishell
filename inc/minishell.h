@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/13 10:26:47 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:13:06 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINISHELL_H
 
 # include "config.h"
-# include "libft.h"
 # include "exe.h"
+# include "libft.h"
 # include "memtrack.h"
 /* # include "parse.h"
 # include "memtrack.h" */
@@ -46,7 +46,6 @@ typedef struct s_node
 
 typedef struct s_memory
 {
-	t_list *list; // Lista de punteros a liberar referencias [&]->[&]->[&]->[&]
 	t_data *data; // Datos de la shell [command, pid]
 	t_tree *tree; // Árbol de datos [cat, priority]-> [ls -l, priority]-> [grep,
 	t_node *node; // Nodo de datos [cat]-> [ls -l]-> [grep]-> [>] -> [txt.txt]

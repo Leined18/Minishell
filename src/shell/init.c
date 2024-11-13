@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/13 10:19:55 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:13:17 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static int	init_node(t_node **node)
 
 static int	init_tree(t_tree **tree)
 {
-	(*tree) = ft_calloc(1, sizeof(t_tree));
+	(*tree) = chaosmatrix(1, sizeof(t_tree), 0);
 	if (!(*tree))
 		return (0);
 	return (1);
 }
 static int	init_data(t_data **data)
 {
-	(*data) = ft_calloc(1, sizeof(t_data));
+	(*data) = chaosmatrix(1, sizeof(t_data), 0);
 	if (!(*data))
 		return (0);
 	return (1);
@@ -40,9 +40,6 @@ static int	link_memory(t_memory *mem)
 	mem->tree->data = mem->data;
 	mem->node->tree = mem->tree;
 	mem->node->data = mem->data;
-	mem->data->list = mem->list;
-	mem->tree->list = mem->list;
-	mem->node->list = mem->list;
 	return (1);
 }
 

@@ -8,7 +8,7 @@
 # include <readline/readline.h>
 
 // Declare your function prototypes here
-int			clean_up(t_memory *mem);
+int			clean_up();
 int			process_input(char *input, t_data *data);
 int			shell_loop(t_memory *mem);
 
