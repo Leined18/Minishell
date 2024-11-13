@@ -55,8 +55,8 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-"C_Cpp_Runner.msvcSecureNoWarnings": false,
-"files.associations": {
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "files.associations": {
     "minishell.h": "c",
     "builtins.h": "c",
     "libft.h": "c",
@@ -78,5 +78,5 @@
     "env.h": "c",
     "history.h": "c",
     "exe.h": "c"
-}
+  }
 }
