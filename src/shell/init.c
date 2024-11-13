@@ -6,15 +6,15 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/11 14:30:12 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:19:55 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "shell.h"
+#include "shell.h"
 
 static int	init_node(t_node **node)
 {
-	(*node) = ft_calloc(1, sizeof(t_node));
+	(*node) = chaosmatrix(1, sizeof(t_node), 0);
 	if (!(*node))
 		return (0);
 	return (1);
@@ -50,11 +50,11 @@ int	init_memory(t_memory *mem, int ac, char **av, char **envp)
 {
 	mem->ac = ac;
 	mem->av = av;
-    (void)envp;
+	(void)envp;
 	if (!init_data(&mem->data))
 		return (0);
 	/* if (!copy_envp(&mem->data->envp, envp))
-        return (0); */
+		return (0); */
 	if (!init_tree(&mem->tree))
 		return (0);
 	if (!init_node(&mem->node))

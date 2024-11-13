@@ -77,6 +77,7 @@
     "readline.h": "c",
     "env.h": "c",
     "history.h": "c",
-    "exe.h": "c"
-  }
+    "exe.h": "c",
+    "memtrack.h": "c"
+}
 }

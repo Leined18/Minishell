@@ -4,7 +4,6 @@
 // Include any necessary headers here
 # include "config.h"
 # include "minishell.h"
-# include "exe.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 

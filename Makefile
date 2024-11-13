@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/11 14:32:25 by danpalac         ###   ########.fr        #
+#    Updated: 2024/11/13 10:30:20 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,10 +57,7 @@ NAME		:= minishell
 PARSE_LIB	:= parse.a
 EXE_LIB		:= exe.a
 LIBFT_LIB	:= libft.a
-
-LIBFT		:= $(LIBFT_DIR)$(LIBFT_LIB)
-EXE 		:= $(EXE_DIR)$(EXE_LIB)
-PARSE		:= $(PARSE_DIR)$(PARSE_LIB)
+MEMTRACK_LIB:= memtrack.a
 
 #==========DIRECTORIES=======================================================#
 
@@ -76,6 +73,10 @@ PARSE_DIR		:= $(SUBMODULES)parse/
 MEMTRACK_DIR	:= $(SUBMODULES)memtrack/
 SHELL_DIR		:= shell/
 
+LIBFT		:= $(LIBFT_DIR)$(LIBFT_LIB)
+EXE 		:= $(EXE_DIR)$(EXE_LIB)
+PARSE		:= $(PARSE_DIR)$(PARSE_LIB)
+MEMTRACK 	:= $(MEMTRACK_DIR)$(MEMTRACK_LIB)
 
 INC_PARSE		:= $(PARSE_DIR)$(OBJ_DIR)$(INC)
 INC_EXE			:= $(EXE_DIR)$(OBJ_DIR)$(INC)
@@ -91,8 +92,8 @@ RM			:= rm -rf
 AR			:= ar rcs
 LIB			:= ranlib
 MKDIR 		:= mkdir -p
-LDFLAGS		:= -L$(LIBFT_DIR) -L$(EXE_DIR) -L$(PARSE_DIR) -lft -lm -fsanitize=address
-IFLAGS		:= -I$(INC) -I$(LIBFT_INC) -I$(INC_PARSE) -I$(INC_EXE) -I$(INC_MEMTRACK) -I$(INC_SHELL)
+LDFLAGS		:= -L$(LIBFT_DIR) -L$(MEMTRACK_DIR) -L$(EXE_DIR) -L$(PARSE_DIR) -lft -lm -fsanitize=address
+IFLAGS		:= -I$(LIBFT_INC) -I$(INC_MEMTRACK) -I$(INC) -I$(INC_SHELL) -I$(INC_PARSE) -I$(INC_EXE)
 RDLFLAG		:= -lreadline
 
 #==========SOURCES============================================================#
@@ -120,10 +121,13 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
 	@$(MKDIR) $(dir $@)	
 	@$(CC) $(CFLAGS) $(IFLAGS) -MP -MMD -c $< -o $@
 
-$(NAME): $(LIBFT) $(EXE) $(PARSE) $(OBJS) 
+$(NAME): $(LIBFT) $(MEMTRACK) $(EXE) $(PARSE) $(OBJS) 
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) $(RDLFLAG)
 	@echo "$(BOLD_CYAN)[$(BOLD_MAGENTA)$(NAME)$(BOLD_CYAN)] compiled!$(DEF_COLOR)"
 	@echo "$(BOLD_CYAN)------------\n| Done! 👌 |\n------------$(DEF_COLOR)"
+
+$(MEMTRACK):
+	@make -sC $(MEMTRACK_DIR)
 
 $(EXE): 
 	@make -sC $(EXE_DIR)

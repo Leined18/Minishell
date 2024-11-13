@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/11 14:24:46 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:26:47 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "config.h"
 # include "libft.h"
 # include "exe.h"
+# include "memtrack.h"
 /* # include "parse.h"
 # include "memtrack.h" */
 
