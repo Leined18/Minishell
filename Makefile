@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/14 10:12:02 by danpalac         ###   ########.fr        #
+#    Updated: 2024/11/14 11:49:30 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,9 +55,9 @@ MOVE_UP     = \033[1A
 
 NAME		:= minishell
 PARSE_LIB	:= parse.a
-EXE_LIB		:= exe.a
+EXE_LIB		:= libexe.a
 LIBFT_LIB	:= libft.a
-MEMTRACK_LIB:= memtrack.a
+MEMTRACK_LIB:= libmt.a
 
 #==========DIRECTORIES=======================================================#
 
@@ -114,14 +114,13 @@ DEPS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 #==========RULES==============================================================#
 
 all: $(NAME)
-
 -include $(DEPS)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(MKDIR) $(dir $@)	
 	@$(CC) $(CFLAGS) $(IFLAGS) -MP -MMD -c $< -o $@
 
-$(NAME): $(LIBFT) $(MEMTRACK) $(EXE) $(OBJS) 
+$(NAME): $(LIBFT) $(MEMTRACK) $(EXE) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(RDLFLAG) $(LDFLAGS) -o $(NAME)
 	@echo "$(BOLD_CYAN)[$(BOLD_MAGENTA)$(NAME)$(BOLD_CYAN)] compiled!$(DEF_COLOR)"
 	@echo "$(BOLD_CYAN)------------\n| Done! 👌 |\n------------$(DEF_COLOR)"
@@ -139,12 +138,11 @@ $(LIBFT):
 	@make -sC $(LIBFT_DIR)
 
 clean:
-	@$(RM) -rf $(OBJ_DIR)
-	@make clean -sC $(LIBFT_DIR)
+	@$(RM) $(OBJ_DIR) $(LIB_DIR)
 	@echo "$(CYAN)[$(NAME)]:\tobject files $(GREEN) => Cleaned!$(DEF_COLOR)"
 
 fclean: clean
-	@$(RM) -rf $(NAME) 
+	@$(RM) $(NAME) 
 	@make fclean -sC $(EXE_DIR)
 	@make fclean -sC $(PARSE_DIR)
 	@make fclean -sC $(MEMTRACK_DIR)
