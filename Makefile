@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
+#    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/13 13:06:44 by danpalac         ###   ########.fr        #
+#    Updated: 2024/11/14 10:12:02 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ RM			:= rm -rf
 AR			:= ar rcs
 LIB			:= ranlib
 MKDIR 		:= mkdir -p
-LDFLAGS		:= -L$(LIB_DIR) -lmemtrack -lexe -lft -g3 -fsanitize=address
+LDFLAGS		:= -L$(LIB_DIR) -lmt -lexe -lft -g3 -fsanitize=address
 IFLAGS		:= -I$(LIB_DIR)/ -I$(INC) -I$(INC_SHELL)
 RDLFLAG		:= -lreadline
 
