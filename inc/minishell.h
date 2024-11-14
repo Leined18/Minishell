@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/14 12:18:39 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:35:58 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,11 @@
 # include "libft.h"
 # include "memtrack.h"
 # include "parse.h"
-/* # include "parse.h"
-# include "memtrack.h" */
 
 typedef struct s_data
 {
 	t_env			*envp;
 	pid_t			pid;
-	t_list			*list;
 }					t_data;
 
 typedef struct s_tree
@@ -33,12 +30,11 @@ typedef struct s_tree
 	t_data			*data;
 	struct s_tree	*left;
 	struct s_tree	*right;
-	t_list			*list;
+	t_mt			*list;
 }					t_tree;
 
 typedef struct s_node
 {
-	t_list			*list;
 	t_tree			*tree;
 	t_data			*data;
 	t_command		*command;
