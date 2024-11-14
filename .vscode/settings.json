@@ -79,6 +79,7 @@
 	"history.h": "c",
 	"exe.h": "c",
 	"memtrack.h": "c",
-	"parse.h": "c"
+	"parse.h": "c",
+	"unistd.h": "c"
 }
 }
