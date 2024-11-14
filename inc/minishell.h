@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/13 13:13:06 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:18:39 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "exe.h"
 # include "libft.h"
 # include "memtrack.h"
+# include "parse.h"
 /* # include "parse.h"
 # include "memtrack.h" */
 

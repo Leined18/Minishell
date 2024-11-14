@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/14 11:49:30 by danpalac         ###   ########.fr        #
+#    Updated: 2024/11/14 12:28:45 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ MOVE_UP     = \033[1A
 #==========NAMES===============================================================#
 
 NAME		:= minishell
-PARSE_LIB	:= parse.a
+PARSE_LIB	:= libparse.a
 EXE_LIB		:= libexe.a
 LIBFT_LIB	:= libft.a
 MEMTRACK_LIB:= libmt.a
@@ -78,11 +78,7 @@ EXE 		:= $(EXE_DIR)$(EXE_LIB)
 PARSE		:= $(PARSE_DIR)$(PARSE_LIB)
 MEMTRACK 	:= $(MEMTRACK_DIR)$(MEMTRACK_LIB)
 
-INC_PARSE		:= $(PARSE_DIR)$(OBJ_DIR)$(INC)
-INC_EXE			:= $(EXE_DIR)$(OBJ_DIR)$(INC)
-INC_MEMTRACK	:= $(MEMTRACK_DIR)$(OBJ_DIR)$(INC)
 INC_SHELL		:= $(SRC_DIR)$(SHELL_DIR)
-LIBFT_INC		:= $(LIBFT_DIR)$(INC)
 
 #==========COMMANDS============================================================#
 
@@ -92,7 +88,7 @@ RM			:= rm -rf
 AR			:= ar rcs
 LIB			:= ranlib
 MKDIR 		:= mkdir -p
-LDFLAGS		:= -L$(LIB_DIR) -lmt -lexe -lft -g3 -fsanitize=address
+LDFLAGS		:= -L$(LIB_DIR) -lparse -lmt -lexe -lft -g3 -fsanitize=address
 IFLAGS		:= -I$(LIB_DIR)/ -I$(INC) -I$(INC_SHELL)
 RDLFLAG		:= -lreadline
 
@@ -120,7 +116,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(MKDIR) $(dir $@)	
 	@$(CC) $(CFLAGS) $(IFLAGS) -MP -MMD -c $< -o $@
 
-$(NAME): $(LIBFT) $(MEMTRACK) $(EXE) $(OBJS)
+$(NAME): $(LIBFT) $(MEMTRACK) $(EXE) $(PARSE) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(RDLFLAG) $(LDFLAGS) -o $(NAME)
 	@echo "$(BOLD_CYAN)[$(BOLD_MAGENTA)$(NAME)$(BOLD_CYAN)] compiled!$(DEF_COLOR)"
 	@echo "$(BOLD_CYAN)------------\n| Done! 👌 |\n------------$(DEF_COLOR)"

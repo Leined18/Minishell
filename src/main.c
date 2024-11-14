@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/14 09:17:14 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:39:20 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,25 @@ int	ft_strcmp(void *s1, void *s2)
 int	main(int ac, char **av, char **ev)
 {
 	t_memory	mem;
+	t_mt		*mt;
+
 	mem = (t_memory){0};
-	if (ac >= 2)
+	if (ac >= 3)
 	{
-		write(1, "Usage: ./minishell\n", 19);
+		ft_printf("Usage temporal: %s <string>\n", av[0]);
 		return (0);
 	}
 	if (!init_memory(&mem, ac, av, ev))
 		return (0);
+	mt = NULL;
+	tokenize(av[1], &mt);
+	(void)mt;
 	/* sigaction_setup(&sigaction_handler);
 	if (!shell_loop(&mem))
 		return (clean_up(&mem), ft_error(ERROR, 0), 0); */
-	ft_mtprint(chaosmatrix(0, 0, 1), 1);
+	ft_printf(BLUE"Matrix commandos:\n"RESET);
+	ft_mtprint(mt, 0);
+	ft_printf(GREEN"Matrix memoria:\n"RESET);
+	ft_mtprint(chaosmatrix(0,0,1), 1);
 	return (ft_successful(SUCCESS, 1), 0);
 }
