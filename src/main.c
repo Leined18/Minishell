@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/14 15:36:43 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/15 11:28:32 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	main(int ac, char **av, char **ev)
 		return (clean_up(&mem), ft_error(ERROR, 0), 0); */
 	ft_printf(BLUE"Matrix commandos:\n"RESET);
 	ft_mtprint(mt, 1, " ");
+    ft_mterase(&mt);
+    ft_mtprint(mt, 1, " ");
 	ft_printf(GREEN"Matrix memoria:\n"RESET);
 	ft_mtprint(chaosmatrix(0,0,1), 0, "\n");
 	return (ft_successful(SUCCESS, 1), 0);
