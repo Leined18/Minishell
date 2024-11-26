@@ -81,6 +81,8 @@
     "memtrack.h": "c",
     "parse.h": "c",
     "unistd.h": "c",
-    "stdio.h": "c"
-  }
+    "stdio.h": "c",
+    "ranges": "c",
+    "*.tcc": "c"
+}
 }

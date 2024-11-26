@@ -6,57 +6,37 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/13 13:13:17 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:32:19 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int	init_node(t_node **node)
+static int	init_data(t_data **data, int ac, char **av, char **envp)
 {
-	(*node) = chaosmatrix(1, sizeof(t_node), 0);
-	if (!(*node))
-		return (0);
-	return (1);
-}
-
-static int	init_tree(t_tree **tree)
-{
-	(*tree) = chaosmatrix(1, sizeof(t_tree), 0);
-	if (!(*tree))
-		return (0);
-	return (1);
-}
-static int	init_data(t_data **data)
-{
-	(*data) = chaosmatrix(1, sizeof(t_data), 0);
+	(*data) = ft_calloc(1, sizeof(t_data));
 	if (!(*data))
 		return (0);
+	(*data)->ac = ac;
+	(*data)->av = av;
+	(*data)->envp = envp;
 	return (1);
 }
 
-static int	link_memory(t_memory *mem)
+t_memory	*init_memory(int ac, char **av, char **envp)
 {
-	mem->tree->data = mem->data;
-	mem->node->tree = mem->tree;
-	mem->node->data = mem->data;
-	return (1);
-}
+	t_data		*data;
+	t_memory	*mem;
 
-int	init_memory(t_memory *mem, int ac, char **av, char **envp)
-{
-	mem->ac = ac;
-	mem->av = av;
-	(void)envp;
-	if (!init_data(&mem->data))
+	data = NULL;
+	mem = NULL;
+	mem = ft_calloc(1, sizeof(t_memory));
+	if (!(mem))
 		return (0);
-	/* if (!copy_envp(&mem->data->envp, envp))
-		return (0); */
-	if (!init_tree(&mem->tree))
+	mem->ht = ft_mtnew_hash_table(10);
+	if (!init_data(&data, ac, av, envp))
 		return (0);
-	if (!init_node(&mem->node))
-		return (0);
-	if (!link_memory(mem))
-		return (0);
-	return (1);
+	mem->data = data;
+    mem->ht->put(mem->ht, "data", ft_mtnew("data_struct", data, LEAF), BRANCH);
+	return (mem);
 }

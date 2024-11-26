@@ -8,12 +8,11 @@
 # include <readline/readline.h>
 
 // Declare your function prototypes here
-int			clean_up();
+int			clean_up(t_memory *mem);
 int			process_input(char *input, t_data *data);
 int			shell_loop(t_memory *mem);
 
 // init.c
-int			init_memory(t_memory *mem, int ac, char **av, char **envp);
-
+t_memory	*init_memory(int ac, char **av, char **envp);
 
 #endif // SHELL_H
