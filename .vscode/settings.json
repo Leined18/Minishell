@@ -84,5 +84,5 @@
     "stdio.h": "c",
     "ranges": "c",
     "*.tcc": "c"
-}
+  }
 }
