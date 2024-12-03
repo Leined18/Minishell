@@ -84,6 +84,7 @@
     "stdio.h": "c",
     "ranges": "c",
     "*.tcc": "c",
-    "mt.h": "c"
+    "mt.h": "c",
+    "algorithm": "c"
 }
 }
