@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/27 10:03:27 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:15:44 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **ev)
 	mem = init_memory(ac, av, ev);
 	if (!mem)
 		return (ft_error(ERROR, 0), 1);
-    mem->ht->print(mem->ht);
+	mem->ht->methods.print(mem->ht);
 	clean_up(mem);
 	return (ft_successful(SUCCESS, 1), 0);
 }

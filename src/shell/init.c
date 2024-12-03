@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/26 14:32:19 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:31:32 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ t_memory	*init_memory(int ac, char **av, char **envp)
 	mem = ft_calloc(1, sizeof(t_memory));
 	if (!(mem))
 		return (0);
-	mem->ht = ft_mtnew_hash_table(10);
 	if (!init_data(&data, ac, av, envp))
 		return (0);
-	mem->data = data;
-    mem->ht->put(mem->ht, "data", ft_mtnew("data_struct", data, LEAF), BRANCH);
+	mem->ht = ft_mthash_new_table(5, "memory");
+	insert_ptr(mem->ht, "structs", "tree structs", data, "data");
 	return (mem);
 }

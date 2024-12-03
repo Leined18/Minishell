@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
+#    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/11/14 12:28:45 by danpalac         ###   ########.fr        #
+#    Updated: 2024/12/03 12:16:13 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ RDLFLAG		:= -lreadline
 #==========SOURCES============================================================#
 
 
-SHELL_FILES		:= cleanup init #shell utils
+SHELL_FILES		:= cleanup init utils #shell 
 MAIN_FILES		:= main
 
 #==========FILES###===========================================================#
