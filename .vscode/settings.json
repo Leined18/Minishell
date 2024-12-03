@@ -83,6 +83,7 @@
     "unistd.h": "c",
     "stdio.h": "c",
     "ranges": "c",
-    "*.tcc": "c"
-  }
+    "*.tcc": "c",
+    "mt.h": "c"
+}
 }

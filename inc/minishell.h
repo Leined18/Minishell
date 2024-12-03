@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/03 12:23:50 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:41:13 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@
 typedef struct s_data
 {
 	pid_t			pid;
-	char			**av;
-	int				ac;
-	char			**envp;
+	t_env			*envp;
 }					t_data;
 
 typedef struct s_memory

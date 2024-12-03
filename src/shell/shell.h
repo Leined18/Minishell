@@ -13,7 +13,7 @@ int			process_input(char *input, t_data *data);
 int			shell_loop(t_memory *mem);
 
 // init.c
-t_memory	*init_memory(int ac, char **av, char **envp);
+t_memory	*init_memory(char **envp);
 void		insert_ptr(t_hash_table *mem, char *parent, char *description,
 				void *data, char *child);
 
