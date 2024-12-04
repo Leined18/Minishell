@@ -14,7 +14,8 @@ int			shell_loop(t_memory *mem);
 
 // init.c
 t_memory	*init_memory(char **envp);
-void		insert_ptr(t_hash_table *mem, char *parent, char *description,
-				void *data, char *child);
+void		insert_ptr(t_hash_table *mem, char *parent, char *child, void *data,
+				void (*free_func)(void **));
+void		insert_description(t_hash_table *mem, char *key, char *data);
 
 #endif // SHELL_H

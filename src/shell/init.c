@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/03 13:45:06 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:48:40 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,10 @@ static int	init_data(t_data **data, char **envp)
 	return (1);
 }
 
-void	ft_mtset_free_func(t_mt *node, void (*free_func)(void **))
-{
-	node->free_data = free_func;
-}
-
-void	ft_mthash_set_free_func(t_hash_table *ht, char *key,
-		void (*free_func)(void **))
-{
-	t_mt	*node;
-
-	node = ht->methods.search(ht, key);
-	if (node)
-		ft_mtset_free_func(node, free_func);
-}
-
 t_memory	*init_memory(char **envp)
 {
-	t_data		*data;
 	t_memory	*mem;
+	t_data		*data;
 
 	data = NULL;
 	mem = NULL;
@@ -50,8 +35,11 @@ t_memory	*init_memory(char **envp)
 	if (!init_data(&data, envp))
 		return (0);
 	mem->ht = ft_mthash_new_table(5, "memory");
-	insert_ptr(mem->ht, "structs", "tree structs", data, "data");
-	insert_ptr(mem->ht, "data", NULL, data->envp, "envp");
-	ft_mthash_set_free_func(mem->ht, "envp", ft_env_free);
+	insert_ptr(mem->ht, "structs", "data", data, NULL);
+	insert_ptr(mem->ht, "data", "envp", data->envp, ft_env_free_func);
+	insert_description(mem->ht, "structs", "arbol de datos");
+	insert_description(mem->ht, "data", "estructura de datos");
+	mem->ht->methods.insert(mem->ht, "hash", ft_mthash_new_table(2, "trash"),
+		HASH_TABLE);
 	return (mem);
 }
