@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2024/12/03 12:53:09 by danpalac         ###   ########.fr        #
+#    Updated: 2024/12/09 11:03:39 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,8 +78,6 @@ EXE 		:= $(EXE_DIR)$(EXE_LIB)
 PARSE		:= $(PARSE_DIR)$(PARSE_LIB)
 MEMTRACK 	:= $(MEMTRACK_DIR)$(MEMTRACK_LIB)
 
-INC_SHELL		:= $(SRC_DIR)$(SHELL_DIR)
-
 #==========COMMANDS============================================================#
 
 CC			:= gcc
@@ -89,7 +87,7 @@ AR			:= ar rcs
 LIB			:= ranlib
 MKDIR 		:= mkdir -p
 LDFLAGS		:= -L$(LIB_DIR) -lexe -lparse -lmt -lft -g3 -fsanitize=address
-IFLAGS		:= -I$(LIB_DIR)/ -I$(INC) -I$(INC_SHELL)
+IFLAGS		:= -I$(LIB_DIR)/ -I$(INC)
 RDLFLAG		:= -lreadline
 
 #==========SOURCES============================================================#

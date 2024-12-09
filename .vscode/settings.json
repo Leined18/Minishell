@@ -85,6 +85,7 @@
     "ranges": "c",
     "*.tcc": "c",
     "mt.h": "c",
-    "algorithm": "c"
-}
+    "algorithm": "c",
+    "utils.h": "c"
+  }
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:14:31 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/04 11:10:21 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:44:54 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "minishell.h"
 
 void	insert_ptr(t_hash_table *mem, char *parent, char *child, void *data,
 		void (*free_func)(void **))

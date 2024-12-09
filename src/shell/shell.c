@@ -6,11 +6,11 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2024/11/11 14:26:39 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:02:10 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "minishell.h"
 
 int	process_input(char *input, t_data *data)
 {

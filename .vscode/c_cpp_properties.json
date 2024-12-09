@@ -3,9 +3,8 @@
         {
             "name": "linux-gcc-x64",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/src/**",
-                "/sgoinfre/students/danpalac/Minishell/submodules/exe/env"
+                "/sgoinfre/students/danpalac/Minishell/submodules/lib",
+                "${workspaceFolder}/inc"
             ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "${default}",

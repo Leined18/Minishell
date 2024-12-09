@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/04 11:48:40 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:50:38 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "minishell.h"
 
 static int	init_data(t_data **data, char **envp)
 {

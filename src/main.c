@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/04 11:50:09 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:02:11 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "shell.h"
 
 void	ft_mtprint_key_list(t_mt *node)
 {
