@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/09 10:50:38 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/12/30 13:02:57 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,5 @@ t_memory	*init_memory(char **envp)
 	insert_ptr(mem->ht, "data", "envp", data->envp, ft_env_free_func);
 	insert_description(mem->ht, "structs", "arbol de datos");
 	insert_description(mem->ht, "data", "estructura de datos");
-	mem->ht->methods.insert(mem->ht, "hash", ft_mthash_new_table(2, "trash"),
-		HASH_TABLE);
 	return (mem);
 }

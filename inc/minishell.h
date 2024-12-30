@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/09 10:57:04 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/12/30 13:04:47 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 // Include any necessary headers here
 
 # include "config.h"
+# include "exe.h"
 # include "libft.h"
 # include "mt.h"
 # include "parse.h"
-# include "exe.h"
 
 typedef struct s_data
 {
@@ -38,19 +38,23 @@ typedef struct s_memory
 // Declare your function prototypes here
 
 // clean_up.c
-int			clean_up(t_memory *mem);
+int					clean_up(t_memory *mem);
 
-//shell.c
-int			process_input(char *input, t_data *data);
-int			shell_loop(t_memory *mem);
+// shell.c
+int					process_input(char *input, t_data *data);
+int					shell_loop(t_memory *mem);
 
 // init.c
-t_memory	*init_memory(char **envp);
+t_memory			*init_memory(char **envp);
 
 // utils.c
-void		insert_ptr(t_hash_table *mem, char *parent, char *child, void *data,
-				void (*free_func)(void **));
-void		insert_description(t_hash_table *mem, char *key, char *data);
+void				insert_ptr(t_hash_table *mem, char *parent, char *child,
+						void *data, void (*free_func)(void **));
+void				insert_description(t_hash_table *mem, char *key,
+						char *data);
+void				ft_set_priority(t_mt *list, void *param,
+						void (*func)(t_mt *, void *));
+int					pred(t_mt *lst, void *p);
 
 # define PROMPT "minishell$ "
 

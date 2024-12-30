@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:14:31 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/09 10:44:54 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/12/30 13:04:43 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,21 @@ void	insert_description(t_hash_table *mem, char *key, char *data)
 		free(new_key);
 	}
 	else
-		ft_replace(node, ft_strdup(data), STRING);
+		ft_replace_data(node, ft_strdup(data), STRING);
+}
+
+void	ft_set_priority(t_mt *list, void *param, void (*func)(t_mt *, void *))
+{
+	if (!list || !func)
+		return ;
+	ft_mtiter(list, param, func);
+}
+
+int	pred(t_mt *lst, void *p)
+{
+	if (!lst)
+		return (-1);
+	if (lst->values.priority == *(int *)p && lst->values.state != END)
+		return (1);
+	return (0);
 }
