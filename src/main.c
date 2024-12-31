@@ -57,7 +57,8 @@ int	exe(t_mt *list, void *p) // funtion to execute
 {
 	if (!list)
 		return (-1);
-	if (!ft_mtsearch(list, p, pred))
+	if (!ft_mtsearch(list, p, pred)) 
+	// busca si no hay otro nodo igual en la lista con la prioridad actual (p)
 	{
 		*(int *)p += 1; // incrementa el contador de prioridad actual
 		return (exe(list, p));
