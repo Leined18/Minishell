@@ -86,6 +86,9 @@
     "*.tcc": "c",
     "mt.h": "c",
     "algorithm": "c",
-    "utils.h": "c"
+    "utils.h": "c",
+    "deque": "c",
+    "unordered_map": "c",
+    "vector": "c"
   }
 }

@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/30 13:11:29 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:20:50 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int ac, char **av, char **ev)
 		return (ft_error(ERROR, 0), 1);
 	env = (t_env *)mem->ht->methods.search_data(mem->ht, "envp");
 	if (env)
-		ft_printf("\n");
+		ft_printf("found \n");
 	list = parse_input("hola como estas");
 	ft_set_priority(list, NULL, set_node_priority);
 	// se usa antes de execute_list,

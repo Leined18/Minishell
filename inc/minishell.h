@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/30 13:04:47 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:25:15 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int					shell_loop(t_memory *mem);
 t_memory			*init_memory(char **envp);
 
 // utils.c
-void				insert_ptr(t_hash_table *mem, char *parent, char *child,
+void				insert_ptr(t_hash_table *mem, char *parent, char *aux,
 						void *data, void (*free_func)(void **));
 void				insert_description(t_hash_table *mem, char *key,
 						char *data);

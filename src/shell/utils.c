@@ -6,18 +6,18 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:14:31 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/30 13:04:43 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:24:30 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	insert_ptr(t_hash_table *mem, char *parent, char *child, void *data,
+void	insert_ptr(t_hash_table *mem, char *parent, char *aux, void *data,
 		void (*free_func)(void **))
 {
-	mem->methods.insert_child(mem, parent, child, data, PTR);
+	mem->methods.insert_aux(mem, parent, aux, data, PTR);
 	if (free_func)
-		mem->methods.set_free_func(mem, child, free_func);
+		mem->methods.set_free_func(mem, aux, free_func);
 }
 
 void	insert_description(t_hash_table *mem, char *key, char *data)
@@ -31,7 +31,7 @@ void	insert_description(t_hash_table *mem, char *key, char *data)
 	if (node->data)
 	{
 		new_key = ft_mtnew_key(node->key, "-description");
-		mem->methods.insert_child(mem, key, new_key, ft_strdup(data), PTR);
+		mem->methods.insert_aux(mem, key, new_key, ft_strdup(data), PTR);
 		free(new_key);
 	}
 	else
