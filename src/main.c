@@ -6,7 +6,15 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2025/01/08 10:20:50 by danpalac         ###   ########.fr       */
+=======
+<<<<<<< HEAD
+/*   Updated: 2024/12/31 17:14:47 by danpalac         ###   ########.fr       */
+=======
+/*   Updated: 2025/01/08 10:20:50 by danpalac         ###   ########.fr       */
+>>>>>>> 7716893 (ajustes con los nuevos cambios de parse,exe,memtrack)
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +82,12 @@ int	main(int ac, char **av, char **ev)
 	env = (t_env *)mem->ht->methods.search_data(mem->ht, "envp");
 	if (env)
 		ft_printf("found \n");
+	list = parse_input("hola como estas");
+	ft_set_priority(list, NULL, set_node_priority);
+	ft_printf("\n");
+	list = parse_input("ls -l | grep .c | wc -l");  // input
+	ft_set_priority(list, NULL, set_node_priority); // set priority to nodes
+	ft_printf("found \n");
 	list = parse_input("hola como estas");
 	ft_set_priority(list, NULL, set_node_priority);
 	// se usa antes de execute_list,
