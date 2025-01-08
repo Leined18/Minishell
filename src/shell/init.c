@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/08 10:23:24 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:50:30 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,21 @@ static int	init_data(t_data **data, char **envp)
 	return (1);
 }
 
-t_memory	*init_memory(char **envp)
+t_hash_table	*init_memory(char **envp, int size)
 {
-	t_memory	*mem;
-	t_data		*data;
+	t_hash_table	*mem;
+	t_data			*data;
 
 	data = NULL;
 	mem = NULL;
-	mem = ft_calloc(1, sizeof(t_memory));
+	mem = ft_mthash_new_table(size, "memory");
 	if (!(mem))
 		return (0);
 	if (!init_data(&data, envp))
 		return (0);
-	mem->ht = ft_mthash_new_table(5, "memory");
-	insert_ptr(mem->ht, "structs", "data", data, NULL);
-	insert_ptr(mem->ht, "data", "envp", data->envp, ft_env_free_func);
-	insert_description(mem->ht, "structs", "arbol de datos");
-	insert_description(mem->ht, "data", "estructura de datos");
+	insert_ptr(mem, "structs", "data", data, NULL);
+	insert_ptr(mem, "data", "envp", data->envp, ft_env_free_func);
+	insert_description(mem, "structs", "arbol de datos");
+	insert_description(mem, "data", "estructura de datos");
 	return (mem);
 }

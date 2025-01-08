@@ -6,16 +6,16 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:23:35 by danpalac          #+#    #+#             */
-/*   Updated: 2024/12/09 10:47:25 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:52:04 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	clean_up(t_memory *mem)
+int	clean_up(t_hash_table *mem)
 {
-	if (mem->ht)
-		mem->ht->methods.free_table(mem->ht);
-	free(mem);
+	if (mem)
+		mem->methods.free_table(mem);
+	mem = NULL;
 	return (1);
 }

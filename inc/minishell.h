@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/08 10:25:15 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:52:16 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 typedef struct s_data
 {
 	pid_t			pid;
+	t_mt			*list;
 	t_env			*envp;
 }					t_data;
 
@@ -38,14 +39,14 @@ typedef struct s_memory
 // Declare your function prototypes here
 
 // clean_up.c
-int					clean_up(t_memory *mem);
+int					clean_up(t_hash_table *mem);
 
 // shell.c
-int					process_input(char *input, t_data *data);
-int					shell_loop(t_memory *mem);
+int					process_input(char *input, t_hash_table *ht);
+int					shell_loop(t_hash_table *mem);
 
 // init.c
-t_memory			*init_memory(char **envp);
+t_hash_table		*init_memory(char **envp, int size);
 
 // utils.c
 void				insert_ptr(t_hash_table *mem, char *parent, char *aux,
