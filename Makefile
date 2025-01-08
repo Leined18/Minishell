@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2025/01/08 10:27:18 by danpalac         ###   ########.fr        #
+#    Updated: 2025/01/08 10:46:20 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ OBJ_DIR 		:= obj/
 
 LIBFT_DIR		:= $(SUBMODULES)libft/
 EXE_DIR			:= $(SUBMODULES)exe/
-PARSE_DIR		:= $(SUBMODULES)parser/
+PARSE_DIR		:= $(SUBMODULES)parse/
 MEMTRACK_DIR	:= $(SUBMODULES)memtrack/
 LIB_DIR			:= $(SUBMODULES)lib
 SHELL_DIR		:= shell/
