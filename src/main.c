@@ -1,27 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 12:21:58 by danpalac          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-/*   Updated: 2025/01/08 10:20:50 by danpalac         ###   ########.fr       */
-=======
-<<<<<<< HEAD
-/*   Updated: 2024/12/31 17:14:47 by danpalac         ###   ########.fr       */
-=======
-/*   Updated: 2025/01/08 10:20:50 by danpalac         ###   ########.fr       */
->>>>>>> 7716893 (ajustes con los nuevos cambios de parse,exe,memtrack)
->>>>>>> Stashed changes
-=======
-/*   Updated: 2024/12/31 17:14:47 by danpalac         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 /**
@@ -107,7 +83,6 @@ int	main(int ac, char **av, char **ev)
 		return (ft_error(ERROR, 0), 1);
 	env = (t_env *)mem->ht->methods.search_data(mem->ht, "envp");
 	if (env)
-<<<<<<< HEAD
 		ft_printf("found \n");
 	list = parse_input("hola como estas");
 	ft_set_priority(list, NULL, set_node_priority);
@@ -117,11 +92,9 @@ int	main(int ac, char **av, char **ev)
 	ft_printf("found \n");
 	list = parse_input("hola como estas");
 	ft_set_priority(list, NULL, set_node_priority);
-=======
 		ft_printf("\n");
 	list = parse_input("ls -l | grep .c | wc -l"); // input
 	ft_set_priority(list, NULL, set_node_priority); // set priority to nodes
->>>>>>> refs/remotes/origin/main
 	// se usa antes de execute_list,
 	ft_execute_list(list, NULL, exe); // execute list with priority
 	// para usar en el shell loop, depende de set_priority
