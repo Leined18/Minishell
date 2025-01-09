@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/08 12:28:02 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/09 12:47:24 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,16 @@ int	process_input(char *input, t_hash_table *ht)
 
 	if (!input || !*input)
 		return (0);
-	pid = fork();
+	pid = 0;
 	(void)ht;
 	if (pid == 0)
 	{
-		input[strcspn(input, "\n")] = 0;
+		input[ft_strcspn(input, "\n")] = 0;
 		list = ft_parse_input(input);
 		ft_set_priority(list, NULL, set_node_priority);
 		ft_execute_list(list, NULL, exe);
 		ft_mtclear(&list);
-		exit(0); // Asegúrate de salir correctamente en el proceso hijo
+		// exit(0); // Asegúrate de salir correctamente en el proceso hijo
 	}
 	else if (pid > 0)
 	{
@@ -104,7 +104,7 @@ int	process_input(char *input, t_hash_table *ht)
 	}
 	else if (pid < 0)
 		return (ft_error(ERROR, 0), 0);
-	return (0);
+	return (1);
 }
 
 int	shell_loop(t_hash_table *mem)

@@ -17,12 +17,6 @@
 # define CONCAT(x, y) x##y
 # define NAME(x) CONCAT(my_var_, x)
 
-// Macro para setear campos en estructuras
-# define SET_FIELD(obj, field, value) (obj.field = value)
-# define GET_FIELD(obj, field) (obj.field)
 
-// Macro para setear punteros en estructuras
-# define SET_FIELD_PTR(obj, field, value) (obj->field = value)
-# define GET_FIELD_PTR(obj, field) (obj->field)
 
 #endif // CONFIG_H
