@@ -6,27 +6,11 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/10 17:59:38 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/01/10 20:16:44 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_exit(char *cmd)
-{
-	if (ft_pmatch_str(cmd->command, "exit", 4) == 0)
-	{
-		if (cmd->args)
-		{
-			if (!ft_isstrnum(cmd->args[0]))
-				return (1);
-			else if (cmd->args[1])
-				return (0);
-		}
-		return (1);
-	}
-	return (0);
-}
 
 /**
  * @brief funcion auxiliar para executar nodos de prioridad 4
@@ -43,6 +27,7 @@ int	exe_word(t_mt *node, t_env *env) // to build, execute commands
 	{
 		print_array2d(env->path);
 		free_command(cmd);
+		node->values.state = END;//????
 	}
 	else if (ft_pmatch_str(cmd->command, "vars", 4) == 0)
 	{
@@ -50,8 +35,6 @@ int	exe_word(t_mt *node, t_env *env) // to build, execute commands
 		ft_printf("%d\n", env->num_var);
 		free_command(cmd);
 	}
-	if (is_exit(cmd))
-		(free(prompt), free_null((void **)&input), rl_clear_history());
 	execution(cmd, env);
 	// if (!node)
 	// 	return (0);
@@ -94,7 +77,7 @@ int	exe(t_mt *list, void *p, t_env *env) // funtion to execute
 	// busca si no hay otro nodo igual en la lista con la prioridad actual (p)
 	{
 		*(int *)p += 1; // incrementa el contador de prioridad actual
-		return (exe(list, p));
+		return (exe(list, p, env));
 		// recursiva para avanzar hasta la prioridad minima existente
 	}
 	if (list->values.priority == 0 && *(int *)p == 0) // parentesis
@@ -168,13 +151,13 @@ int	shell_loop(t_hash_table *mem)
 	}
 }
 
-int	process_input_two(char *input, t_env *env)
+int	process_input_two(t_env *env)
 {
 	t_mt	*parsed_lst;
 
-	if (!input || !*input)
+	if (!env->input || !*env->input)
 		return (0);
-	parsed_lst = ft_parse_input(input);
+	parsed_lst = ft_parse_input(env->input);
 	ft_set_priority(parsed_lst, NULL, set_node_priority);
 	ft_execute_list(parsed_lst, NULL, env, exe);
 	ft_mtclear(&parsed_lst);
@@ -183,8 +166,6 @@ int	process_input_two(char *input, t_env *env)
 
 int	shell_loop_two(t_hash_table *mem)
 {
-	char		*input;
-	char		*prompt;
 	//t_mt		*parsed_lst;
 	//t_command	*cmd;
 	t_env		*env;
@@ -192,17 +173,15 @@ int	shell_loop_two(t_hash_table *mem)
 	env = (t_env *)mem->methods.search_data(mem, "envp");
 	while (1)
 	{
-		prompt = generate_prompt(env->mt_env);
-		input = readline(prompt);
-		if (input == NULL)
-			return (free(prompt), rl_clear_history(), 1);
-		if (*input)
+		env->prompt = generate_prompt(env->mt_env);
+		env->input = readline(env->prompt);
+		if (env->input == NULL)
+			return (free(env->prompt), rl_clear_history(), 1);
+		if (*env->input)
 		{
-			add_history(input);
+			add_history(env->input);
 			//parsed_lst = ft_parse_input(input);
-			if (is_exit(cmd))
-				(free(prompt), free_null((void **)&input), rl_clear_history());
-			process_input_two(input, env);
+			process_input_two(env);
 			//cmd = create_command(parsed_lst, env->path);
 			//ft_mtclear(&parsed_lst);
 			// print_command(cmd);
@@ -230,6 +209,6 @@ int	shell_loop_two(t_hash_table *mem)
 			// execution(cmd, env);
 			// free_command(cmd);
 		}
-		(free(prompt), free_null((void **)&input));
+		(free(env->prompt), free_null((void **)&env->input));
 	}
 }
