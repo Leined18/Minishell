@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/09 12:47:24 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/10 17:59:38 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_exit(char *cmd)
+{
+	if (ft_pmatch_str(cmd->command, "exit", 4) == 0)
+	{
+		if (cmd->args)
+		{
+			if (!ft_isstrnum(cmd->args[0]))
+				return (1);
+			else if (cmd->args[1])
+				return (0);
+		}
+		return (1);
+	}
+	return (0);
+}
 
 /**
  * @brief funcion auxiliar para executar nodos de prioridad 4
@@ -18,14 +34,31 @@
  * @param node
  * @return int devuelve 1 si se a ejecutado correctamente, sino devuelve 0
  */
-int	exe_word(t_mt *node) // to build, execute commands
+int	exe_word(t_mt *node, t_env *env) // to build, execute commands
 {
-	if (!node)
-		return (0);
-	printf("key: %s\n", (char *)node->key);
-	printf("Data: %s\n", (char *)node->data);
-	printf("State: %d\n", node->values.state);
-	printf("priority: %d\n", node->values.priority);
+	t_command	*cmd;
+
+	cmd = create_command(node, env->path);
+	if (ft_pmatch_str(cmd->command, "path", 4) == 0)
+	{
+		print_array2d(env->path);
+		free_command(cmd);
+	}
+	else if (ft_pmatch_str(cmd->command, "vars", 4) == 0)
+	{
+		print_lst_data(env->mt_var);
+		ft_printf("%d\n", env->num_var);
+		free_command(cmd);
+	}
+	if (is_exit(cmd))
+		(free(prompt), free_null((void **)&input), rl_clear_history());
+	execution(cmd, env);
+	// if (!node)
+	// 	return (0);
+	// printf("key: %s\n", (char *)node->key);
+	// printf("Data: %s\n", (char *)node->data);
+	// printf("State: %d\n", node->values.state);
+	// printf("priority: %d\n", node->values.priority);
 	return (1);
 } // por implementar
 int	exe_operator(t_mt *node, int (*funt)(t_mt *, void *), void *param)
@@ -53,7 +86,7 @@ int	exe_operator(t_mt *node, int (*funt)(t_mt *, void *), void *param)
  * @param i parametro para identificar cuantos quedan de la prioridad actual
  * @return int
  */
-int	exe(t_mt *list, void *p) // funtion to execute
+int	exe(t_mt *list, void *p, t_env *env) // funtion to execute
 {
 	if (!list)
 		return (-1);
@@ -73,7 +106,7 @@ int	exe(t_mt *list, void *p) // funtion to execute
 	else if (list->values.priority == 3 && *(int *)p == 3) // operators
 		return (exe_operator(list, NULL, NULL));           // por implementar
 	else if (list->values.priority == 4 && *(int *)p == 4) // words
-		return (exe_word(list));                           // por implementar
+		return (exe_word(list, env));                           // por implementar
 	else if (list->values.priority == 5 && *(int *)p == 5) // assignaments
 		return (1);
 	return (0);
@@ -132,5 +165,71 @@ int	shell_loop(t_hash_table *mem)
 		// liberamos input para leer uno nuevo y que no se quede sin liberar.
 		free_null((void **)&input);
 		usleep(10000);
+	}
+}
+
+int	process_input_two(char *input, t_env *env)
+{
+	t_mt	*parsed_lst;
+
+	if (!input || !*input)
+		return (0);
+	parsed_lst = ft_parse_input(input);
+	ft_set_priority(parsed_lst, NULL, set_node_priority);
+	ft_execute_list(parsed_lst, NULL, env, exe);
+	ft_mtclear(&parsed_lst);
+	// exit(0); // Asegúrate de salir correctamente en el proceso hijo
+}
+
+int	shell_loop_two(t_hash_table *mem)
+{
+	char		*input;
+	char		*prompt;
+	//t_mt		*parsed_lst;
+	//t_command	*cmd;
+	t_env		*env;
+
+	env = (t_env *)mem->methods.search_data(mem, "envp");
+	while (1)
+	{
+		prompt = generate_prompt(env->mt_env);
+		input = readline(prompt);
+		if (input == NULL)
+			return (free(prompt), rl_clear_history(), 1);
+		if (*input)
+		{
+			add_history(input);
+			//parsed_lst = ft_parse_input(input);
+			if (is_exit(cmd))
+				(free(prompt), free_null((void **)&input), rl_clear_history());
+			process_input_two(input, env);
+			//cmd = create_command(parsed_lst, env->path);
+			//ft_mtclear(&parsed_lst);
+			// print_command(cmd);
+			// if (ft_pmatch_str(cmd->command, "path", 4) == 0)
+			// {
+			// 	print_array2d(env->path);
+			// 	(free_command(cmd), free(prompt), free_null((void **)&input));
+			// 	continue;
+			// }
+			// else if (ft_strchr(cmd->command, '='))
+			// {
+			// 	ft_assignation(cmd, env);
+			// 	(free_command(cmd), free(prompt), free_null((void **)&input));
+			// 	continue;
+			// }
+			// else if (ft_pmatch_str(cmd->command, "vars", 4) == 0)
+			// {
+			// 	print_lst_data(env->mt_var);
+			// 	ft_printf("%d\n", env->num_var);
+			// 	(free_command(cmd), free(prompt), free_null((void **)&input));
+			// 	continue;
+			// }
+			// if (is_exit(cmd))
+			// 	(free(prompt), free_null((void **)&input), rl_clear_history());
+			// execution(cmd, env);
+			// free_command(cmd);
+		}
+		(free(prompt), free_null((void **)&input));
 	}
 }
