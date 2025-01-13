@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2025/01/13 09:04:05 by danpalac         ###   ########.fr        #
+#    Updated: 2025/01/13 11:21:31 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,8 +132,12 @@ $(LIBFT):
 	@make -sC $(LIBFT_DIR)
 
 clean:
-	@$(RM) $(OBJ_DIR) $(LIB_DIR)
-	@echo "$(CYAN)[$(NAME)]:\tobject files $(GREEN) => Cleaned!$(DEF_COLOR)"
+	@if [ -d "$(OBJ_DIR)" ]; then \
+		$(RM) $(OBJ_DIR) $(LIB_DIR); \
+		echo "$(CYAN)[$(NAME)]:\tobject files $(GREEN) => Cleaned!$(DEF_COLOR)"; \
+	else \
+		echo "$(CYAN)[$(NAME)]:\tobject files $(RED) => Not found!$(DEF_COLOR)"; \
+	fi
 
 fclean: clean
 	@$(RM) $(NAME) 
@@ -141,7 +145,6 @@ fclean: clean
 	@make fclean -sC $(PARSE_DIR)
 	@make fclean -sC $(MEMTRACK_DIR)
 	@make fclean -sC $(LIBFT_DIR)
-	@echo "$(CYAN)[$(NAME)]:\texec. files $(GREEN) => Cleaned!$(DEF_COLOR)"
 
 re: fclean all
 
