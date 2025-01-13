@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/08 11:50:30 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:11:58 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	init_data(t_data **data, char **envp)
 	if (!(*data))
 		return (0);
 	(*data)->envp = copy_envp(envp);
-	(*data)->pid = 0;
+	(*data)->pid = getpid();
 	return (1);
 }
 
