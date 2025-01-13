@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/13 10:32:13 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:51:48 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,12 @@ int	exe_word(t_mt *node, t_env *env) // to build, execute commands
 		return (0);
 	cmd = create_command(node, env->path);
 	if (ft_pmatch_str(cmd->command, "path", 4) == 0)
-	{
 		print_array2d(env->path);
-		free_command(cmd);
-		node->values.state = END; //????
-	}
 	else if (ft_pmatch_str(cmd->command, "vars", 4) == 0)
-	{
 		print_lst_data(env->mt_var);
-		ft_printf("%d\n", env->num_var);
-		free_command(cmd);
-	}
-	execution(cmd, env);
+	else
+		execution(cmd, env);
+	node->values.state = END;
 	free_command(cmd);
 	return (1);
 } // por implementar
@@ -94,7 +88,7 @@ int	exe(t_mt *list, void *p, t_env *env) // funtion to execute
 	return (0);
 }
 
-int	process_input_two(t_env *env)
+int	process_input(t_env *env)
 {
 	t_mt	*parsed_lst;
 
@@ -122,7 +116,7 @@ int	shell_loop(t_hash_table *mem)
 		if (*env->input)
 		{
 			add_history(env->input);
-			process_input_two(env);
+			process_input(env);
 		}
 		(free(env->prompt), free_null((void **)&env->input));
 	}

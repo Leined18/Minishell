@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/13 09:16:36 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:06:20 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 
@@ -42,7 +43,7 @@ typedef struct s_memory
 int					clean_up(t_hash_table *mem);
 
 // shell.c
-int					process_input(char *input, t_hash_table *ht);
+int					process_input(t_env *env);
 int					shell_loop(t_hash_table *mem);
 
 // init.c
