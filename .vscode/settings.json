@@ -59,6 +59,8 @@
   "files.associations": {
     "exe.h": "c",
     "types.h": "c",
-    "exe_utils.h": "c"
+    "exe_utils.h": "c",
+    "minishell.h": "c",
+    "config.h": "c"
   }
 }
