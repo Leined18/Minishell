@@ -3,7 +3,6 @@
 int	main(int ac, char **av, char **ev)
 {
 	t_hash_table	*mem;
-	t_env			*env;
 
 	if (ac >= 3)
 	{
@@ -13,9 +12,6 @@ int	main(int ac, char **av, char **ev)
 	mem = init_memory(ev, 5);
 	if (!mem)
 		return (ft_error(ERROR, 0), 1);
-	env = (t_env *)mem->methods.search_data(mem, "envp");
-	if (env)
-		ft_printf("found \n");
 	shell_loop(mem);
 	mem->methods.print(mem);
 	clean_up(mem);
