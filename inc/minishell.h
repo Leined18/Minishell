@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/08 11:52:16 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/13 09:16:36 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ int					shell_loop(t_hash_table *mem);
 t_hash_table		*init_memory(char **envp, int size);
 
 // utils.c
+int					ft_execute_list(t_mt *head, void *p, t_env *env,
+						int (*proccess_node)(t_mt *, void *, t_env *));
+
 void				insert_ptr(t_hash_table *mem, char *parent, char *aux,
 						void *data, void (*free_func)(void **));
 void				insert_description(t_hash_table *mem, char *key,

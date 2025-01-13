@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2025/01/08 11:10:58 by danpalac         ###   ########.fr        #
+#    Updated: 2025/01/13 09:04:05 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,7 @@ RDLFLAG		:= -lreadline
 #==========SOURCES============================================================#
 
 
-SHELL_FILES		:= cleanup init utils shell 
+SHELL_FILES		:= cleanup init utils shell helpers_exe
 MAIN_FILES		:= main
 
 #==========FILES###===========================================================#
