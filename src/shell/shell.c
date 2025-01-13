@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/13 11:51:48 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:18:06 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	exe(t_mt *list, void *p, t_env *env) // funtion to execute
 	else if (list->values.priority == 4 && *(int *)p == 4) // words
 		return (exe_word(list, env));                      // por implementar
 	else if (list->values.priority == 5 && *(int *)p == 5) // assignaments
-		return (1);
+		return (ft_assignation(list, env));
 	return (0);
 }
 
