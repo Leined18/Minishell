@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/13 13:58:59 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/01/14 09:34:06 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	exe_word(t_mt *node, t_env *env) // to build, execute commands
 
 	if (!node || !env)
 		return (0);
-	cmd = create_command(node, env->path);
+	cmd = create_command(node, env);
 	if (ft_pmatch_str(cmd->command, "path", 4) == 0)
 		print_array2d(env->path);
 	else if (ft_pmatch_str(cmd->command, "vars", 4) == 0)
