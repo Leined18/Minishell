@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/14 11:03:21 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/01/15 20:17:24 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	exe_word(t_mt *node, t_env *env) // to build, execute commands
 	free_command(cmd);
 	return (1);
 } // por implementar
+
 int	exe_operator(t_mt *node, int (*funt)(t_mt *, void *), void *param)
 // use a funtion pointer to execute the node operator
 {
@@ -43,6 +44,12 @@ int	exe_operator(t_mt *node, int (*funt)(t_mt *, void *), void *param)
 		return (0);
 	if (funt && funt(node, param))
 		return (0);
+
+	// if (!ft_strcmp(node->data, "|"))
+	// 	return (exe_pipes(node, (t_env *)param)); // Manejar pipes
+	// else if (!ft_strcmp(node->data, "&"))
+	// 	return (exe_background(node, param)); // Manejar segundo plano
+
 	if (node->vect[LEFT]) // execute left node to redirect
 	{
 		exe_word(node->vect[LEFT], param);
@@ -55,6 +62,7 @@ int	exe_operator(t_mt *node, int (*funt)(t_mt *, void *), void *param)
 	}
 	return (1);
 } // por implementar
+
 /**
  * @brief executa por orden de prioridad,
 	funcion que será pasada por parametro a ft_execute_list
@@ -80,10 +88,10 @@ int	exe(t_mt *list, void *p, t_env *env) // funtion to execute
 		return (1);                                        // por implementar
 	else if (list->values.priority == 2 && *(int *)p == 2) // redirections
 		return (1);                                        // por implementar
-	else if (list->values.priority == 3 && *(int *)p == 3) // operators
+	else if (list->values.priority == 3 && *(int *)p == 3) // operators (pipes y &)
 		return (exe_operator(list, NULL, env));            // por implementar
 	else if (list->values.priority == 4 && *(int *)p == 4) // words
-		return (exe_word(list, env));                      // por implementar
+		return (exe_word(list, env));
 	else if (list->values.priority == 5 && *(int *)p == 5) // assignaments
 		return (ft_assignation(list, env));
 	return (0);
