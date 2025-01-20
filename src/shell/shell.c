@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/17 14:14:04 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:51:34 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,17 @@ int	exe_word(t_mt *node, t_env *env) // to build, execute commands
 	if (!node || !env)
 		return (0);
 	cmd = create_command(node, env);
-	ft_printf("entro en exe\n");
-	print_command(cmd);
+	//print_command(cmd);
 	if (ft_pmatch_str(cmd->command, "path", 4) == 0)
 		print_array2d(env->path);
 	else if (ft_pmatch_str(cmd->command, "vars", 4) == 0)
 		print_lst_data(env->mt_var);
 	else
-		execution(cmd, env);
+		execution(cmd, env, 0);
 	node->values.state = END;
 	free_command(cmd);
 	return (1);
-} // por implementar
+}
 
 int	exe_operator(t_mt *node, int (*funt)(t_mt *, void *), void *param)
 // use a funtion pointer to execute the node operator
@@ -50,17 +49,6 @@ int	exe_operator(t_mt *node, int (*funt)(t_mt *, void *), void *param)
 		return (exe_pipes(node, (t_env *)param)); // Manejar pipes
 	// else if (!ft_strcmp(node->data, "&"))
 	// 	return (exe_background(node, param)); // Manejar segundo plano
-
-	// if (node->vect[LEFT]) // execute left node to redirect
-	// {
-	// 	exe_word(node->vect[LEFT], param);
-	// 	node->vect[LEFT]->values.state = END;
-	// }
-	// if (node->vect[RIGHT]) // execute right node with redirection
-	// {
-	// 	exe_word(node->vect[RIGHT], param);
-	// 	node->vect[RIGHT]->values.state = END;
-	// }
 	return (1);
 } // por implementar
 
