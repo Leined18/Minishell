@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/20 19:51:34 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:36:54 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	exe_word(t_mt *node, t_env *env) // to build, execute commands
 	if (!node || !env)
 		return (0);
 	cmd = create_command(node, env);
-	//print_command(cmd);
+	// print_command(cmd);
 	if (ft_pmatch_str(cmd->command, "path", 4) == 0)
 		print_array2d(env->path);
 	else if (ft_pmatch_str(cmd->command, "vars", 4) == 0)
@@ -77,7 +77,8 @@ int	exe(t_mt *list, void *p, t_env *env) // funtion to execute
 		return (1);                                        // por implementar
 	else if (list->values.priority == 2 && *(int *)p == 2) // redirections
 		return (1);                                        // por implementar
-	else if (list->values.priority == 3 && *(int *)p == 3) // operators (pipes y &)
+	else if (list->values.priority == 3 && *(int *)p == 3)
+		// operators (pipes y &)
 		return (exe_operator(list, NULL, env));            // por implementar
 	else if (list->values.priority == 4 && *(int *)p == 4) // words
 		return (exe_word(list, env));
@@ -97,20 +98,40 @@ int	process_input(t_env *env)
 	ft_execute_list(parsed_lst, NULL, env, exe);
 	ft_mtclear(&parsed_lst);
 	return (1);
-	// exit(0); // Asegúrate de salir correctamente en el proceso hijo
+}
+
+void	handle_signal(int sig)
+{
+	if (sig == SIGINT)
+	{
+		printf("\n");           // Nueva línea para manejar Ctrl+C
+		rl_on_new_line();       // Indicar que se comienza una nueva línea
+		rl_replace_line("", 0); // Reemplazar la línea actual (vaciarla)
+		rl_redisplay();         // Redistribuir el prompt
+	}
+	else if (sig == SIGUSR1)
+	{
+		printf("\n");     // Nueva línea
+		rl_on_new_line(); // Indicar que estamos en una nueva línea
+		rl_redisplay();   // Redistribuir el prompt
+	}
 }
 
 int	shell_loop(t_hash_table *mem)
 {
 	t_env	*env;
 
+	signal(SIGINT, handle_signal);  // Maneja Ctrl+C
+	signal(SIGUSR1, handle_signal); // Maneja
+	signal(SIGQUIT, SIG_IGN);       // Ignora Ctrl+'\'
+	signal(SIGTSTP, SIG_IGN);       // Ignora Ctrl+Z
 	env = (t_env *)mem->methods.search_data(mem, "envp");
 	while (1)
 	{
 		env->prompt = generate_prompt(env->mt_env);
 		env->input = readline(env->prompt);
 		if (env->input == NULL)
-			return (free(env->prompt), rl_clear_history(), 1);
+			return (free(env->prompt), rl_clear_history(), 0);
 		if (*env->input)
 		{
 			add_history(env->input);
@@ -118,4 +139,5 @@ int	shell_loop(t_hash_table *mem)
 		}
 		(free(env->prompt), free_null((void **)&env->input));
 	}
+	return (0);
 }
