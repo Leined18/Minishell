@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/22 16:36:54 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/23 13:29:42 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	exe(t_mt *list, void *p, t_env *env) // funtion to execute
 {
 	if (!list)
 		return (-1);
-	if (!ft_mtsearch(list, p, pred))
+	if (!ft_mtsearch(list, p, pred)) // ls -l | grep > hola.txt
 	// busca si no hay otro nodo igual en la lista con la prioridad actual (p)
 	{
 		*(int *)p += 1; // incrementa el contador de prioridad actual
@@ -87,27 +87,50 @@ int	exe(t_mt *list, void *p, t_env *env) // funtion to execute
 	return (0);
 }
 
-int	process_input(t_env *env)
+void	handle_child_signal(int sig)
+{
+	if (sig == SIGINT) // control + c
+	{
+		kill(getpid(), SIGKILL);
+	}
+	else if (sig == SIGUSR1)
+	{
+		printf("\n");     // Nueva línea
+		rl_on_new_line(); // Indicar que estamos en una nueva línea
+		rl_redisplay();   // Redistribuir el prompt
+	}
+}
+
+int	process_input(t_env *env, t_hash_table *mem)
 {
 	t_mt	*parsed_lst;
+	t_data	*data;
 
 	if (!env->input || !*env->input)
 		return (0);
-	parsed_lst = ft_parse_input(env->input);
-	ft_set_priority(parsed_lst, NULL, set_node_priority);
-	ft_execute_list(parsed_lst, NULL, env, exe);
-	ft_mtclear(&parsed_lst);
+	data = (t_data *)mem->methods.search_data(mem, "data");
+	data->pid = fork();
+	if (data->pid == 0)
+	{
+		signal(SIGINT, handle_child_signal);
+		parsed_lst = ft_parse_input(env->input);
+		ft_set_priority(parsed_lst, NULL, set_node_priority);
+		ft_execute_list(parsed_lst, NULL, env, exe);
+		ft_mtclear(&parsed_lst);
+		exit(0);
+	}
+	waitpid(data->pid, NULL, 0);
 	return (1);
 }
 
 void	handle_signal(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT) // control + c
 	{
-		printf("\n");           // Nueva línea para manejar Ctrl+C
-		rl_on_new_line();       // Indicar que se comienza una nueva línea
-		rl_replace_line("", 0); // Reemplazar la línea actual (vaciarla)
-		rl_redisplay();         // Redistribuir el prompt
+		//printf("\n");           // Nueva línea para manejar Ctrl+C
+		//rl_on_new_line();       // Indicar que se comienza una nueva línea
+		//rl_replace_line("", 0); // Reemplazar la línea actual (vaciarla)
+		//rl_redisplay();         // Redistribuir el prompt
 	}
 	else if (sig == SIGUSR1)
 	{
@@ -121,7 +144,7 @@ int	shell_loop(t_hash_table *mem)
 {
 	t_env	*env;
 
-	signal(SIGINT, handle_signal);  // Maneja Ctrl+C
+	signal(SIGINT, SIG_IGN);  // Maneja Ctrl+C
 	signal(SIGUSR1, handle_signal); // Maneja
 	signal(SIGQUIT, SIG_IGN);       // Ignora Ctrl+'\'
 	signal(SIGTSTP, SIG_IGN);       // Ignora Ctrl+Z
@@ -135,7 +158,7 @@ int	shell_loop(t_hash_table *mem)
 		if (*env->input)
 		{
 			add_history(env->input);
-			process_input(env);
+			process_input(env, mem);
 		}
 		(free(env->prompt), free_null((void **)&env->input));
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/22 15:31:48 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/23 11:50:18 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@
 # include "mt.h"
 # include "parse.h"
 
+
 typedef struct s_data
 {
 	pid_t			pid;
+	pid_t			ppid;
+	int				singals[5];
 	t_mt			*list;
 	t_env			*envp;
 }					t_data;
@@ -43,7 +46,7 @@ typedef struct s_memory
 int					clean_up(t_hash_table *mem);
 
 // shell.c
-int					process_input(t_env *env);
+int					process_input(t_env *env, t_hash_table *mem);
 int					shell_loop(t_hash_table *mem);
 
 // init.c
