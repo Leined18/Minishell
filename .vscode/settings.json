@@ -88,6 +88,12 @@
     "input.h": "c",
     "signal.h": "c",
     "cstdlib": "c",
-    "list": "c"
+    "list": "c",
+    "mt.h": "c",
+    "source_location": "c",
+    "cmd.h": "c",
+    "mtmethods.h": "c",
+    "mtlib.h": "c",
+    "mtstructs.h": "c"
   }
 }

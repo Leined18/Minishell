@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/23 11:50:18 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:21:08 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_memory
 int					clean_up(t_hash_table *mem);
 
 // shell.c
-int					process_input(t_env *env, t_hash_table *mem);
+int					process_input(t_env *env);
 int					shell_loop(t_hash_table *mem);
 
 // init.c
