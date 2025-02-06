@@ -94,6 +94,8 @@
     "cmd.h": "c",
     "mtmethods.h": "c",
     "mtlib.h": "c",
-    "mtstructs.h": "c"
+    "mtstructs.h": "c",
+    "ft_printf.h": "c",
+    "functional": "c"
   }
 }
