@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/13 11:38:29 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/01/23 11:44:16 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	init_data(t_data **data, char **envp)
 	if (!(*data))
 		return (0);
 	(*data)->envp = copy_envp(envp);
-	(*data)->pid = getpid();
+	(*data)->ppid = getpid();
 	return (1);
 }
 

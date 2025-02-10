@@ -3,36 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/02/10 11:34:21 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:25:04 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	handle_child_signal(int sig)
+{
+	if (sig == SIGINT) // control + c
+	{
+		ft_printf("\n");
+		kill(getpid(), SIGKILL);
+	}
+	else if (sig == SIGUSR1)
+	{
+		printf("\n");     // Nueva línea
+		rl_on_new_line(); // Indicar que estamos en una nueva línea
+		rl_redisplay();   // Redistribuir el prompt
+	}
+}
+
 int	process_input(t_env *env)
 {
-	t_mt	*parsed_lst;
+	t_mt	*parsed_tree;
 
 	if (!env->input || !*env->input)
 		return (0);
-	parsed_lst = ft_parse_input(env->input);
-	ft_execute_tree(parsed_lst, env, 0);
+	signal(SIGINT, handle_child_signal);
+	parsed_tree = ft_parse_input(env->input);
+	ft_execute_tree(parsed_tree, env, 0);
 	/* ft_execute_tree(parsed_lst, NULL, env, ft_execute_node); */
-	ft_mtclear(&parsed_lst);
+	restore_stdin_stdout(env);
+	ft_mtclear(&parsed_tree);
 	return (1);
 }
 
 void	handle_signal(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT) // control + c
 	{
-		printf("\n");           // Nueva línea para manejar Ctrl+C
-		rl_on_new_line();       // Indicar que se comienza una nueva línea
-		rl_replace_line("", 0); // Reemplazar la línea actual (vaciarla)
-		rl_redisplay();         // Redistribuir el prompt
+		//printf("\n");           // Nueva línea para manejar Ctrl+C
+		//rl_on_new_line();       // Indicar que se comienza una nueva línea
+		//rl_replace_line("", 0); // Reemplazar la línea actual (vaciarla)
+		//rl_redisplay();         // Redistribuir el prompt
 	}
 	else if (sig == SIGUSR1)
 	{
@@ -46,7 +63,7 @@ int	shell_loop(t_hash_table *mem)
 {
 	t_env	*env;
 
-	signal(SIGINT, handle_signal);  // Maneja Ctrl+C
+	signal(SIGINT, SIG_IGN);  // Maneja Ctrl+C
 	signal(SIGUSR1, handle_signal); // Maneja
 	signal(SIGQUIT, SIG_IGN);       // Ignora Ctrl+'\'
 	signal(SIGTSTP, SIG_IGN);       // Ignora Ctrl+Z
@@ -66,3 +83,6 @@ int	shell_loop(t_hash_table *mem)
 	}
 	return (0);
 }
+//cat | sort | < entrada.txt > salida.txt REVISAR. POSIBLE CAMBIO EN SWAP
+//cat | sort | uniq < entrada.txt > salida.txt
+//cat | sort < entrada1.txt | uniq < entrada2.txt > salida.txt
