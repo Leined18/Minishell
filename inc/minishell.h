@@ -6,16 +6,16 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/22 15:31:48 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:58:26 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <stdio.h>
 
 // Include any necessary headers here
 
@@ -49,9 +49,6 @@ int					shell_loop(t_hash_table *mem);
 // init.c
 t_hash_table		*init_memory(char **envp, int size);
 
-// utils.c
-int					ft_execute_list(t_mt *head, void *p, t_env *env,
-						int (*proccess_node)(t_mt *, void *, t_env *));
 
 void				insert_ptr(t_hash_table *mem, char *parent, char *aux,
 						void *data, void (*free_func)(void **));
