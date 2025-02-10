@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/02/06 18:05:06 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:15:02 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	process_input(t_env *env)
 		return (0);
 	signal(SIGINT, handle_child_signal);
 	parsed_tree = ft_parse_input(env->input);
-	execute_tree(parsed_tree, env, 0);
+	ft_execute_tree(parsed_tree, env, 0);
 	restore_stdin_stdout(env);
 	ft_mtclear(&parsed_tree);
 	return (1);
@@ -72,13 +72,13 @@ int	shell_loop(t_hash_table *mem)
 		env->prompt = generate_prompt(env->mt_env);
 		env->input = readline(env->prompt);
 		if (env->input == NULL)
-			return (free(env->prompt), rl_clear_history(), 0);
+			return (free_null((void **)&env->prompt), rl_clear_history(), 0);
 		if (*env->input)
 		{
 			add_history(env->input);
 			process_input(env);
 		}
-		(free(env->prompt), free_null((void **)&env->input));
+		(free_null((void **)&env->prompt), free_null((void **)&env->input));
 	}
 	return (0);
 }
