@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/02/06 17:59:55 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:05:06 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,3 +82,6 @@ int	shell_loop(t_hash_table *mem)
 	}
 	return (0);
 }
+//cat | sort | < entrada.txt > salida.txt REVISAR. POSIBLE CAMBIO EN SWAP
+//cat | sort | uniq < entrada.txt > salida.txt
+//cat | sort < entrada1.txt | uniq < entrada2.txt > salida.txt
