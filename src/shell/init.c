@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/23 11:44:16 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:21:27 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ static int	init_data(t_data **data, char **envp)
 		return (0);
 	(*data)->envp = copy_envp(envp);
 	(*data)->ppid = getpid();
+	(*data)->singals[0][0] = SIGINT;
+	(*data)->singals[0][1] = SIGUSR1;
+	(*data)->singals[0][2] = SIGUSR2;
+	(*data)->singals[0][3] = SIGCHLD;
+	(*data)->singals[1][0] = SIGQUIT;
+	(*data)->singals[1][1] = SIGTSTP;
+	(*data)->singals[1][2] = SIGINT;
 	return (1);
 }
 

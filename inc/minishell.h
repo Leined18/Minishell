@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/02/10 20:21:34 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:34:15 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@
 # include "mt.h"
 # include "parse.h"
 
-
 typedef struct s_data
 {
 	pid_t			pid;
 	pid_t			ppid;
-	int				singals[5];
+	int				singals[2][5];
 	t_mt			*list;
 	t_env			*envp;
 }					t_data;
@@ -52,6 +51,17 @@ int					shell_loop(t_hash_table *mem);
 // init.c
 t_hash_table		*init_memory(char **envp, int size);
 
+// signals_utils
+
+void				ft_set_handler(int *sigs, int n_sigs,
+						void(funtion)(int sig));
+void				ft_set_ignore(int *sigs, int n_sigs);
+void				ft_setmod_signal(t_data *data, int ignore, int set,
+						void(handler)(int sig));
+void				handle_child_signal(int sig);
+void				handle_signal(int sig, siginfo_t *info, void *context);
+
+// utils
 
 void				insert_ptr(t_hash_table *mem, char *parent, char *aux,
 						void *data, void (*free_func)(void **));

@@ -27,6 +27,8 @@
 # define ERROR "\033[1;31m❌ Error: Error in function!\n\033[0m"
 // Rojo
 # define WARNING "\033[1;33m⚠️ Warning: Warning in function!\n\033[0m"
+
+# define USAGE "Usage: %s <string>\n"
 // Amarillo
 // Macro para concatenar nombres
 # define CONCAT(x, y) x##y
