@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/02/11 14:27:34 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:06:01 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	process_input(t_env *env)
 	ft_execute_tree(parsed_tree, env, 0);
 	restore_stdin_stdout(env);
 	ft_mtclear(&parsed_tree);
+	(void)env->last_status;
 	return (1);
 }
 
