@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/02/11 13:34:15 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/03 08:52:29 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void				insert_ptr(t_hash_table *mem, char *parent, char *aux,
 						void *data, void (*free_func)(void **));
 void				insert_description(t_hash_table *mem, char *key,
 						char *data);
-void				ft_set_priority(t_mt *list, void *param,
-						void (*func)(t_mt *, void *));
 int					pred(t_mt *lst, void *p);
 
 # define PROMPT "minishell$ "

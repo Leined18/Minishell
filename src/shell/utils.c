@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:14:31 by danpalac          #+#    #+#             */
-/*   Updated: 2025/01/08 10:24:30 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/03 08:54:52 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@ void	insert_description(t_hash_table *mem, char *key, char *data)
 	}
 	else
 		ft_replace_data(node, ft_strdup(data), STRING);
-}
-
-void	ft_set_priority(t_mt *list, void *param, void (*func)(t_mt *, void *))
-{
-	if (!list || !func)
-		return ;
-	ft_mtiter(list, param, func);
 }
 
 int	pred(t_mt *lst, void *p)
