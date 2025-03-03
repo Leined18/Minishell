@@ -97,6 +97,10 @@
 	"mtstructs.h": "c",
 	"ft_printf.h": "c",
 	"functional": "c",
-	"shared.h": "c"
+	"shared.h": "c",
+	"ratio": "c",
+	"array": "c",
+	"type_traits": "c",
+	"utility": "c"
 }
 }

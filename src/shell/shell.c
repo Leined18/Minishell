@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/01 19:00:20 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:59:00 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ static int	ft_loop(t_env *env)
 	while (TRUE)
 	{
 		env->prompt = generate_prompt(env->mt_env);
-		ft_putstr_fd("\033[2K\r", 1);
-		env->input = readline((const char *)env->prompt);
+		env->input = readline(env->prompt);
 		if (env->input == NULL)
 			return (free_null((void **)&env->prompt), rl_clear_history(), 0);
 		if (*env->input)
-			(add_history(env->input), process_input(env));
+		{
+			add_history(env->input);
+			process_input(env);
+		}
 		(free_null((void **)&env->prompt), free_null((void **)&env->input));
 	}
 	return (1);
@@ -71,6 +73,6 @@ int	shell_loop(t_hash_table *mem)
 	waitpid(pid, &status, 0);
 	return (status);
 }
-// cat | sort | < entrada.txt > salida.txt REVISAR. POSIBLE CAMBIO EN SWAP
+// cat | sort | < entrada.txt > salida.txt
 // cat | sort | uniq < entrada.txt > salida.txt
 // cat | sort < entrada1.txt | uniq < entrada2.txt > salida.txt

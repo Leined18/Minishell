@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/03 08:52:29 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:55:08 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
