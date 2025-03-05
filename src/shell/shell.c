@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/03 17:59:00 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/05 11:36:35 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	process_input(t_env *env)
 	ft_execute_tree(parsed_tree, env, 0);
 	restore_stdin_stdout(env);
 	ft_mtclear(&parsed_tree);
-	(void)env->last_status;
 	return (1);
 }
 
@@ -35,6 +34,7 @@ static int	ft_loop(t_env *env)
 	while (TRUE)
 	{
 		env->prompt = generate_prompt(env->mt_env);
+		ft_putstr_fd("\033[2K\r", 1);
 		env->input = readline(env->prompt);
 		if (env->input == NULL)
 			return (free_null((void **)&env->prompt), rl_clear_history(), 0);
