@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/05 11:38:37 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:48:52 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_memory
 	t_hash_table	*ht;
 }					t_memory;
 
+# define HISTORY ".minishell_history"
+
 // Declare your function prototypes here
 
 // clean_up.c
@@ -68,7 +70,5 @@ void				insert_ptr(t_hash_table *mem, char *parent, char *aux,
 void				insert_description(t_hash_table *mem, char *key,
 						char *data);
 int					pred(t_mt *lst, void *p);
-
-# define PROMPT "minishell$ "
 
 #endif
