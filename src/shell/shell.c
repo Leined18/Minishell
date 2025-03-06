@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/06 11:33:58 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:38:38 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static int	ft_loop(t_env *env)
 	while (TRUE)
 	{
 		env->prompt = generate_prompt(env->mt_env);
-		ft_putstr_fd("\033[2K\r", 1);
 		env->input = readline(env->prompt);
 		if (env->input == NULL)
 			return (free_null((void **)&env->prompt), rl_clear_history(), 0);
@@ -118,8 +117,6 @@ int	shell_loop(t_hash_table *mem)
 		env->last_status = status;
 		printf("\n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
 	}
 	return (status);
 }
