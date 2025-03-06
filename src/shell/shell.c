@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/06 11:06:59 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:33:58 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	process_input(t_env *env)
 	parsed_tree = ft_parse_input(env->input);
 	if (!parsed_tree)
 		return (env->last_status = 2, 0);
+	if (ft_mtsearch_key(parsed_tree, "./minishell"))
+		signal(SIGINT, SIG_IGN);
 	ft_execute_tree(parsed_tree, env, 0);
 	restore_stdin_stdout(env);
 	ft_mtclear(&parsed_tree);
