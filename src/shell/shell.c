@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/06 10:58:28 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:06:59 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ int	ft_init_subshell(t_env *env, int *status)
 	if (pid < 0)
 		return (ft_error("err", 0), 0);
 	waitpid(pid, status, 0);
-	*status = update_last_status(*status);
-	env->last_status = *status;
 	return (*status);
 }
 
@@ -112,11 +110,13 @@ int	shell_loop(t_hash_table *mem)
 	env = (t_env *)mem->methods.search_data(mem, "envp");
 	while (ft_init_subshell(env, &status))
 	{
-		if (status < 128)
-			break ;
-		printf("\n");           // Nueva línea para manejar Ctrl+C
-		rl_on_new_line();       // Indicar que se comienza una nueva línea
-		rl_replace_line("", 0); // Reemplazar la línea actual (vaciarla)
+		if (WIFEXITED(status))
+			return (update_last_status(status));
+		status = update_last_status(status);
+		env->last_status = status;
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 	return (status);
