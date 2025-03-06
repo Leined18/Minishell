@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/06 11:41:55 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:00:23 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	process_input(t_env *env)
 	return (1);
 }
 
-static void	ft_add_line_history(const char *line)
+static void	ft_add_line_history(const char *line, char *file_path)
 {
 	int		fd;
 	char	*copy;
@@ -42,7 +42,7 @@ static void	ft_add_line_history(const char *line)
 	if (!copy)
 		return ;
 	add_history(copy);
-	fd = open(HISTORY, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	fd = open(file_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	write(fd, copy, ft_strlen(copy));
 	write(fd, "\n", 1);
 	free(copy);
@@ -61,7 +61,7 @@ static int	ft_loop(t_env *env)
 			return (free_null((void **)&env->prompt), rl_clear_history(), 0);
 		if (*env->input)
 		{
-			ft_add_line_history(env->input);
+			ft_add_line_history(env->input, HISTORY);
 			process_input(env);
 		}
 		(free_null((void **)&env->prompt), free_null((void **)&env->input));
@@ -69,12 +69,12 @@ static int	ft_loop(t_env *env)
 	return (1);
 }
 
-void	ft_load_history(void)
+void	ft_load_history(char *path_history)
 {
 	int		fd;
 	char	*history_line;
 
-	fd = open(HISTORY, O_RDONLY);
+	fd = open(path_history, O_RDONLY, 0644);
 	while (1)
 	{
 		history_line = get_next_line(fd);
@@ -94,7 +94,7 @@ int	ft_init_subshell(t_env *env, int *status)
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
-		ft_load_history();
+		ft_load_history(HISTORY);
 		if (!ft_loop(env))
 			exit(0);
 	}
