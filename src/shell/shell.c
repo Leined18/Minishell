@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/06 12:02:09 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:06:00 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	ft_loop(t_env *env)
 			return (free_null((void **)&env->prompt), rl_clear_history(), 0);
 		if (*env->input)
 		{
-			ft_add_line_history(env->input, HISTORY);
+			ft_add_line_history(env->input, env->path_history);
 			process_input(env);
 		}
 		(free_null((void **)&env->prompt), free_null((void **)&env->input));
@@ -96,7 +96,7 @@ int	ft_init_subshell(t_env *env, int *status)
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
-		ft_load_history(HISTORY);
+		ft_load_history(env->path_history);
 		if (!ft_loop(env))
 			exit(0);
 	}

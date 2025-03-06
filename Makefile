@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
+#    By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2025/03/06 11:12:41 by danpalac         ###   ########.fr        #
+#    Updated: 2025/03/06 15:10:47 by mvidal-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,7 +133,7 @@ $(LIBFT):
 
 clean:
 	@if [ -d "$(OBJ_DIR)" ]; then \
-		$(RM) $(OBJ_DIR) $(LIB_DIR) .minishell_history; \
+		$(RM) $(OBJ_DIR) $(LIB_DIR) ~/.minishell_history; \
 		echo "$(CYAN)[$(NAME)]:\tobject files $(GREEN) => Cleaned!$(DEF_COLOR)"; \
 	else \
 		echo "$(CYAN)[$(NAME)]:\tobject files $(RED) => Not found!$(DEF_COLOR)"; \
