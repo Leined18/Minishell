@@ -14,7 +14,7 @@ int	main(int ac, char **av, char **ev)
 	data = mem->methods.search_data(mem, "data");
 	ft_setmod_signal(data, 3, 0, NULL);
 	status = shell_loop(mem);
-	if (WIFEXITED(status))
-		return (clean_up(mem), WEXITSTATUS(status));
+	if (status)
+		return (clean_up(mem), status);
 	return (clean_up(mem), 0);
 }

@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2025/02/11 08:35:23 by danpalac         ###   ########.fr        #
+#    Updated: 2025/03/06 10:35:57 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,7 +133,7 @@ $(LIBFT):
 
 clean:
 	@if [ -d "$(OBJ_DIR)" ]; then \
-		$(RM) $(OBJ_DIR) $(LIB_DIR); \
+		$(RM) $(OBJ_DIR) $(LIB_DIR) .minishell_history; \
 		echo "$(CYAN)[$(NAME)]:\tobject files $(GREEN) => Cleaned!$(DEF_COLOR)"; \
 	else \
 		echo "$(CYAN)[$(NAME)]:\tobject files $(RED) => Not found!$(DEF_COLOR)"; \
