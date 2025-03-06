@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/06 10:44:39 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/06 10:51:13 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,23 @@ int	process_input(t_env *env)
 	restore_stdin_stdout(env);
 	ft_mtclear(&parsed_tree);
 	return (1);
+}
+
+void	ft_load_history(void)
+{
+	int		fd;
+	char	*history_line;
+
+	fd = open(HISTORY, O_RDONLY);
+	while (1)
+	{
+		history_line = get_next_line(fd);
+		if (!history_line)
+			break ;
+		add_history(history_line);
+		free(history_line);
+	}
+	close(fd);
 }
 
 static void	ft_add_line_history(const char *line)
@@ -67,24 +84,6 @@ static int	ft_loop(t_env *env)
 	return (1);
 }
 
-void	ft_recover_history(void)
-{
-	char	*history_line;
-	int		fd;
-
-	history_line = (void *)2;
-	fd = open(HISTORY, O_RDONLY);
-	while (history_line)
-	{
-		history_line = get_next_line(fd);
-		if (!history_line)
-			break ;
-		add_history(history_line);
-		free(history_line);
-	}
-	close(fd);
-}
-
 int	ft_init_subshell(t_env *env, int *status)
 {
 	int	pid;
@@ -93,7 +92,7 @@ int	ft_init_subshell(t_env *env, int *status)
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
-		ft_recover_history();
+		ft_load_history();
 		if (!ft_loop(env))
 			exit(0);
 	}
