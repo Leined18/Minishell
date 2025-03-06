@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/06 10:51:13 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/06 10:56:14 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,23 @@ static int	ft_loop(t_env *env)
 		(free_null((void **)&env->prompt), free_null((void **)&env->input));
 	}
 	return (1);
+}
+
+void	ft_load_history(void)
+{
+	int		fd;
+	char	*history_line;
+
+	fd = open(HISTORY, O_RDONLY);
+	while (1)
+	{
+		history_line = get_next_line(fd);
+		if (!history_line)
+			break ;
+		add_history(history_line);
+		free(history_line);
+	}
+	close(fd);
 }
 
 int	ft_init_subshell(t_env *env, int *status)
