@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/06 12:00:23 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:02:09 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	ft_add_line_history(const char *line, char *file_path)
 	int		fd;
 	char	*copy;
 
-	if (!line)
+	if (!line || !file_path)
 		return ;
 	fd = 0;
 	copy = ft_strtrim(line, " \v\t\n\r");
@@ -74,6 +74,8 @@ void	ft_load_history(char *path_history)
 	int		fd;
 	char	*history_line;
 
+	if (!path_history)
+		return ;
 	fd = open(path_history, O_RDONLY, 0644);
 	while (1)
 	{
