@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/06 10:56:14 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/06 10:58:28 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,6 @@ int	process_input(t_env *env)
 	restore_stdin_stdout(env);
 	ft_mtclear(&parsed_tree);
 	return (1);
-}
-
-void	ft_load_history(void)
-{
-	int		fd;
-	char	*history_line;
-
-	fd = open(HISTORY, O_RDONLY);
-	while (1)
-	{
-		history_line = get_next_line(fd);
-		if (!history_line)
-			break ;
-		add_history(history_line);
-		free(history_line);
-	}
-	close(fd);
 }
 
 static void	ft_add_line_history(const char *line)
