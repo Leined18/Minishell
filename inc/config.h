@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   config.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/07 11:01:51 by danpalac          #+#    #+#             */
+/*   Updated: 2025/03/07 11:02:09 by danpalac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CONFIG_H
 # define CONFIG_H
 
@@ -18,10 +30,6 @@
 # include <termios.h>
 # include <unistd.h>
 
-// Macros para funciones y operaciones
-# define SQUARE(x) ((x) * (x))     // Devuelve el cuadrado de x
-# define CUBE(x) ((x) * (x) * (x)) // Devuelve el cubo de x
-
 # define SUCCESS "\033[1;32m✅ Success: Function finished well!\n\033[0m"
 // Verde
 # define ERROR "\033[1;31m❌ Error: Error in function!\n\033[0m"
@@ -29,9 +37,5 @@
 # define WARNING "\033[1;33m⚠️ Warning: Warning in function!\n\033[0m"
 
 # define USAGE "Usage: %s <string>\n"
-// Amarillo
-// Macro para concatenar nombres
-# define CONCAT(x, y) x##y
-# define NAME(x) CONCAT(my_var_, x)
 
 #endif // CONFIG_H

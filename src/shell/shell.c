@@ -3,115 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/06 15:06:00 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/07 12:40:03 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	process_input(t_env *env)
+int	shell_loop(t_env *env)
 {
-	t_mt	*parsed_tree;
-
-	if (!env->input || !*env->input)
-		return (0);
-	parsed_tree = ft_parse_input(env->input);
-	if (!parsed_tree)
-		return (env->last_status = 2, 0);
-	if (ft_mtsearch_key(parsed_tree, "./minishell"))
-		signal(SIGINT, SIG_IGN);
-	ft_execute_tree(parsed_tree, env, 0);
-	signal(SIGINT, SIG_DFL);
-	restore_stdin_stdout(env);
-	ft_mtclear(&parsed_tree);
-	return (1);
-}
-
-static void	ft_add_line_history(const char *line, char *file_path)
-{
-	int		fd;
-	char	*copy;
-
-	if (!line || !file_path)
-		return ;
-	fd = 0;
-	copy = ft_strtrim(line, " \v\t\n\r");
-	if (!copy)
-		return ;
-	add_history(copy);
-	fd = open(file_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	write(fd, copy, ft_strlen(copy));
-	write(fd, "\n", 1);
-	free(copy);
-	close(fd);
-}
-
-static int	ft_loop(t_env *env)
-{
-	if (!env)
-		return (0);
-	while (TRUE)
-	{
-		env->prompt = generate_prompt(env->mt_env);
-		env->input = readline(env->prompt);
-		if (env->input == NULL)
-			return (free_null((void **)&env->prompt), rl_clear_history(), 0);
-		if (*env->input)
-		{
-			ft_add_line_history(env->input, env->path_history);
-			process_input(env);
-		}
-		(free_null((void **)&env->prompt), free_null((void **)&env->input));
-	}
-	return (1);
-}
-
-void	ft_load_history(char *path_history)
-{
-	int		fd;
-	char	*history_line;
-
-	if (!path_history)
-		return ;
-	fd = open(path_history, O_RDONLY, 0644);
-	while (1)
-	{
-		history_line = get_next_line(fd);
-		if (!history_line)
-			break ;
-		add_history(history_line);
-		free(history_line);
-	}
-	close(fd);
-}
-
-int	ft_init_subshell(t_env *env, int *status)
-{
-	int	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		ft_load_history(env->path_history);
-		if (!ft_loop(env))
-			exit(0);
-	}
-	if (pid < 0)
-		return (ft_error("err", 0), 0);
-	waitpid(pid, status, 0);
-	return (*status);
-}
-
-int	shell_loop(t_hash_table *mem)
-{
-	t_env	*env;
 	int		status;
 
-	env = (t_env *)mem->methods.search_data(mem, "envp");
 	while (ft_init_subshell(env, &status))
 	{
 		if (WIFEXITED(status))

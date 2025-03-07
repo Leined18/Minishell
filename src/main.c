@@ -12,8 +12,8 @@ int	main(int ac, char **av, char **ev)
 	if (!mem)
 		return (ft_error(ERROR, 0), 1);
 	data = mem->methods.search_data(mem, "data");
-	ft_setmod_signal(data, 3, 0, NULL);
-	status = shell_loop(mem);
+	ft_set_ignore(data->ignore, 3);
+	status = shell_loop(data->envp);
 	if (status)
 		return (clean_up(mem), status);
 	return (clean_up(mem), 0);

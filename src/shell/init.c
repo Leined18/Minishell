@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2025/02/11 11:21:27 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/07 11:30:59 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,9 @@ static int	init_data(t_data **data, char **envp)
 		return (0);
 	(*data)->envp = copy_envp(envp);
 	(*data)->ppid = getpid();
-	(*data)->singals[0][0] = SIGINT;
-	(*data)->singals[0][1] = SIGUSR1;
-	(*data)->singals[0][2] = SIGUSR2;
-	(*data)->singals[0][3] = SIGCHLD;
-	(*data)->singals[1][0] = SIGQUIT;
-	(*data)->singals[1][1] = SIGTSTP;
-	(*data)->singals[1][2] = SIGINT;
+	(*data)->ignore[0] = SIGQUIT;
+	(*data)->ignore[1] = SIGTSTP;
+	(*data)->ignore[2] = SIGINT;
 	return (1);
 }
 
@@ -41,9 +37,7 @@ t_hash_table	*init_memory(char **envp, int size)
 		return (0);
 	if (!init_data(&data, envp))
 		return (0);
-	insert_ptr(mem, "structs", "data", data, NULL);
-	insert_ptr(mem, "data", "envp", data->envp, ft_env_free_func);
-	insert_description(mem, "structs", "arbol de datos");
-	insert_description(mem, "data", "estructura de datos");
+	mem->methods.insert(mem, "data", data, NONE);
+	mem->methods.set_free_func(mem, "data", clean_data);
 	return (mem);
 }
