@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/07 12:40:03 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:48:46 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	shell_loop(t_env *env)
 {
-	int		status;
+	int	status;
 
 	while (ft_init_subshell(env, &status))
 	{

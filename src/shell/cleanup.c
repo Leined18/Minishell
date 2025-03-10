@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:23:35 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/07 11:30:23 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:52:01 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	clean_up(t_hash_table *mem)
 	if (mem)
 		mem->methods.free_table(mem);
 	mem = NULL;
+	rl_clear_history();
 	return (1);
 }

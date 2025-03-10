@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:19:30 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/07 12:40:10 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:51:55 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,13 @@ void	ft_add_line_history(const char *line, char *file_path)
 	if (!line || !file_path)
 		return ;
 	fd = 0;
+	add_history(line);
+	fd = open(file_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (fd < 0)
+		return ;
 	copy = ft_strtrim(line, " \v\t\n\r");
 	if (!copy)
 		return ;
-	add_history(copy);
-	fd = open(file_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	write(fd, copy, ft_strlen(copy));
 	write(fd, "\n", 1);
 	free(copy);
@@ -77,11 +79,14 @@ void	ft_load_history(char *path_history)
 	if (!path_history)
 		return ;
 	fd = open(path_history, O_RDONLY, 0644);
+	if (fd < 0)
+		return ;
 	while (1)
 	{
 		history_line = get_next_line(fd);
 		if (!history_line)
 			break ;
+		history_line[ft_strlen(history_line) - 1] = 0;
 		add_history(history_line);
 		free(history_line);
 	}
@@ -95,10 +100,13 @@ int	ft_init_subshell(t_env *env, int *status)
 	pid = fork();
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);
 		ft_load_history(env->path_history);
+		signal(SIGINT, SIG_DFL);
 		if (!ft_loop(env))
+		{
+			rl_clear_history();
 			exit(0);
+		}
 	}
 	if (pid < 0)
 		return (ft_error("err", 0), 0);
