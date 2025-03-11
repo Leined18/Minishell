@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:19:30 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/10 11:51:55 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:47:17 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,20 @@ int	process_input(t_env *env)
 
 static int	ft_loop(t_env *env)
 {
+	char	*aux_input;
 	if (!env)
 		return (0);
 	while (TRUE)
 	{
 		env->prompt = generate_prompt(env->mt_env);
-		env->input = readline(env->prompt);
-		if (env->input == NULL)
+		aux_input = readline(env->prompt);
+		if (aux_input == NULL)
 			return (free_null((void **)&env->prompt), rl_clear_history(), 0);
-		if (*env->input)
+		if (*aux_input)
 		{
-			ft_add_line_history(env->input, env->path_history);
+			env->input = ft_expand_input(aux_input, env);
+			ft_add_line_history(aux_input, env->path_history);
+			free(aux_input);
 			process_input(env);
 		}
 		(free_null((void **)&env->prompt), free_null((void **)&env->input));
