@@ -6,7 +6,7 @@
 #    By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 14:34:27 by danpalac          #+#    #+#              #
-#    Updated: 2025/03/10 10:52:18 by danpalac         ###   ########.fr        #
+#    Updated: 2025/03/12 13:13:11 by danpalac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ AR			:= ar rcs
 LIB			:= ranlib
 MKDIR 		:= mkdir -p
 LDFLAGS		:= -L$(LIB_DIR) -lexe -lparse -lmt -lft -g3 -fsanitize=address
-IFLAGS		:= -I$(LIB_DIR)/ -I$(INC)
+IFLAGS		:= -I$(LIB_DIR)/$(INC) -I$(INC)
 RDLFLAG		:= -lreadline
 
 #==========SOURCES============================================================#
