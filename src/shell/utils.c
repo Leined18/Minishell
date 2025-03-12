@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:19:30 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/11 14:47:17 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:23:15 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	process_input(t_env *env)
 static int	ft_loop(t_env *env)
 {
 	char	*aux_input;
+
 	if (!env)
 		return (0);
 	while (TRUE)
@@ -45,10 +46,11 @@ static int	ft_loop(t_env *env)
 		{
 			env->input = ft_expand_input(aux_input, env);
 			ft_add_line_history(aux_input, env->path_history);
-			free(aux_input);
+			free_null((void **)&aux_input);
 			process_input(env);
 		}
-		(free_null((void **)&env->prompt), free_null((void **)&env->input));
+		(free_null((void **)&env->prompt), free_null((void **)&aux_input),
+			free_null((void **)&env->input));
 	}
 	return (1);
 }
@@ -106,10 +108,7 @@ int	ft_init_subshell(t_env *env, int *status)
 		ft_load_history(env->path_history);
 		signal(SIGINT, SIG_DFL);
 		if (!ft_loop(env))
-		{
-			rl_clear_history();
 			exit(0);
-		}
 	}
 	if (pid < 0)
 		return (ft_error("err", 0), 0);
