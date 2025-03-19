@@ -105,6 +105,7 @@
     "stdio.h": "c",
     "readline.h": "c",
     "future": "c",
-    "istream": "c"
+    "istream": "c",
+    "env.h": "c"
   }
 }

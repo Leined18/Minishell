@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:19:30 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/19 17:06:35 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/19 18:49:17 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	process_input(t_data *data)
 	parsed_tree = ft_parse_input(env->input);
 	if (!parsed_tree)
 		return (env->last_status = 2, 0);
-	if (ft_mtsearch_key(parsed_tree, "./minishell"))
-		signal(SIGINT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	ft_execute_tree(parsed_tree, env, 0);
 	restore_stdin_stdout(env);
 	if (env->error_infile_name)

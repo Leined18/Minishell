@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/19 16:56:08 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/19 19:26:55 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int	shell_loop(t_data *data)
 			sig_received = 0;
 		}
 		if (aux_input == NULL)
+		{
+			ft_printf("exit\n");
 			return (free_null((void **)&env->prompt), rl_clear_history(), 0);
+		}
 		if (*aux_input)
 		{
 			env->input = ft_expand_input(aux_input, env);
