@@ -103,6 +103,8 @@
     "type_traits": "c",
     "utility": "c",
     "stdio.h": "c",
-    "readline.h": "c"
+    "readline.h": "c",
+    "future": "c",
+    "istream": "c"
   }
 }

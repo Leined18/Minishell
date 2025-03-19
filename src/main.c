@@ -4,7 +4,6 @@ int	main(int ac, char **av, char **ev)
 {
 	t_hash_table	*mem;
 	t_data			*data;
-	int				status;
 
 	if (ac >= 3)
 		return (ft_printf(USAGE, av[0]), 0);
@@ -13,8 +12,7 @@ int	main(int ac, char **av, char **ev)
 		return (ft_error(ERROR, 0), 1);
 	data = mem->methods.search_data(mem, "data");
 	ft_set_ignore(data->ignore, 3);
-	status = shell_loop(data->envp);
-	if (status)
-		return (clean_up(mem), status);
+	ft_load_history(data->envp->path_history);
+	shell_loop(data);
 	return (clean_up(mem), 0);
 }
