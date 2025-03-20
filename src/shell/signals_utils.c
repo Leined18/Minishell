@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 08:34:01 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/20 12:06:15 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:06:04 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@
 // 		i++;
 // 	}
 // }
+
+void	handle_signal(int sig)
+{
+	if (sig == SIGINT)
+	{
+		g_sig_received = SIGINT;
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
 
 void	ft_set_ignore(int *sigs, int n_sigs)
 {

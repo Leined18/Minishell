@@ -6,25 +6,13 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/20 13:02:39 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:05:50 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 volatile sig_atomic_t	g_sig_received;
-
-void	handle_signal(int sig)
-{
-	if (sig == SIGINT)
-	{
-		g_sig_received = SIGINT;
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
 
 void	set_sigint_last_status(t_env *env)
 {
