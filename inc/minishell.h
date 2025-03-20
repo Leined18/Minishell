@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/19 17:01:06 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:05:49 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,9 @@ int					shell_loop(t_data *data);
 // init.c
 t_hash_table		*init_memory(char **envp, int size);
 
-// signals_utils
-
-void				ft_set_handler(int *sigs, int n_sigs,
-						void(funtion)(int sig));
+// signals_utils.c
+// void				ft_set_handler(int *sigs, int n_sigs, void(funtion)(int sig));
 void				ft_set_ignore(int *sigs, int n_sigs);
-void				handle_child_signal(int sig);
 void				ft_set_default(int *sigs, int n_sigs);
 
 #endif

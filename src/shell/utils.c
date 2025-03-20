@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:19:30 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/19 18:49:17 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:06:36 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	process_input(t_data *data)
 {
 	t_mt	*parsed_tree;
-	t_env 	*env;
+	t_env	*env;
 
 	env = data->envp;
 	if (!env->input || !*env->input)
