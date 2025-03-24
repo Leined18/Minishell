@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:21:28 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/20 15:07:52 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:31:45 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 // Include any necessary headers here
 
 # include "config.h"
-# include "global_signal.h"
 # include "exe.h"
 # include "libft.h"
 # include "mt.h"
@@ -63,5 +62,6 @@ t_hash_table		*init_memory(char **envp, int size);
 void				ft_set_ignore(int *sigs, int n_sigs);
 void				ft_set_default(int *sigs, int n_sigs);
 void				handle_signal(int sig);
+void				handle_sigint_adv_readine(int sig);
 
 #endif
