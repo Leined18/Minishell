@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/24 12:34:50 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:34:46 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@ void	set_sigint_last_status(t_env *env)
 void	manage_input(char **aux_input, t_data *data)
 {
 	t_env	*env;
+	int		status;
 
 	env = data->envp;
 	signal(SIGINT, SIG_IGN);
-	if (ft_extend(aux_input) <= 0)
+	status = ft_extend(aux_input);
+	if (status == -1)
+		env->last_status = 2;
+	if (status <= 0)
 		return ;
 	env->input = ft_expand_input(*aux_input, env);
 	ft_add_line_history(*aux_input, env->path_history);
