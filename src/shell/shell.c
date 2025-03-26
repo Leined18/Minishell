@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:29:32 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/25 15:34:46 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:01:16 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "global_signal.h"
 
 volatile sig_atomic_t	g_sig_received;
 
@@ -35,6 +34,8 @@ void	manage_input(char **aux_input, t_data *data)
 	if (status <= 0)
 		return ;
 	env->input = ft_expand_input(*aux_input, env);
+	if (!env->input)
+		return ;
 	ft_add_line_history(*aux_input, env->path_history);
 	process_input(data);
 }

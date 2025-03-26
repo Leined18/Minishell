@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:19:30 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/24 11:29:55 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:31:24 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	process_input(t_data *data)
 	parsed_tree = ft_parse_input(env->input);
 	if (!parsed_tree)
 		return (env->last_status = 2, 0);
-	//signal(SIGINT, SIG_IGN);
 	ft_execute_tree(parsed_tree, env, 0);
 	restore_stdin_stdout(env);
 	if (env->error_infile_name)
