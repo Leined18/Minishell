@@ -104,10 +104,13 @@
     "utility": "c",
     "stdio.h": "c",
     "readline.h": "c",
+<<<<<<< Updated upstream
     "future": "c",
     "istream": "c",
     "env.h": "c",
     "sstream": "c",
+=======
+>>>>>>> Stashed changes
     "global_signal.h": "c"
   }
 }
