@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:11:29 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/07 11:30:59 by danpalac         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:14:18 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_hash_table	*init_memory(char **envp, int size)
 	t_hash_table	*mem;
 	t_data			*data;
 
+	if (size < 1 || !envp)
+		return (0);
 	data = NULL;
 	mem = NULL;
 	mem = ft_mthash_new_table(size, "memory");

@@ -3,28 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:19:30 by danpalac          #+#    #+#             */
-/*   Updated: 2025/03/14 12:32:12 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:31:24 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	process_input(t_env *env)
+int	process_input(t_data *data)
 {
 	t_mt	*parsed_tree;
+	t_env	*env;
 
+	env = data->envp;
 	if (!env->input || !*env->input)
 		return (0);
 	parsed_tree = ft_parse_input(env->input);
 	if (!parsed_tree)
 		return (env->last_status = 2, 0);
-	if (ft_mtsearch_key(parsed_tree, "./minishell"))
-		signal(SIGINT, SIG_IGN);
 	ft_execute_tree(parsed_tree, env, 0);
-	signal(SIGINT, SIG_DFL);
 	restore_stdin_stdout(env);
 	if (env->error_infile_name)
 	{
@@ -32,31 +31,6 @@ int	process_input(t_env *env)
 		free_null((void **)&env->error_infile_name);
 	}
 	ft_mtclear(&parsed_tree);
-	return (1);
-}
-
-static int	ft_loop(t_env *env)
-{
-	char	*aux_input;
-
-	if (!env)
-		return (0);
-	while (TRUE)
-	{
-		env->prompt = generate_prompt(env->mt_env);
-		aux_input = readline(env->prompt);
-		if (aux_input == NULL)
-			return (free_null((void **)&env->prompt), rl_clear_history(), 0);
-		if (*aux_input)
-		{
-			env->input = ft_expand_input(aux_input, env);
-			ft_add_line_history(aux_input, env->path_history);
-			free_null((void **)&aux_input);
-			process_input(env);
-		}
-		(free_null((void **)&env->prompt), free_null((void **)&aux_input),
-			free_null((void **)&env->input));
-	}
 	return (1);
 }
 
@@ -103,20 +77,20 @@ void	ft_load_history(char *path_history)
 	close(fd);
 }
 
-int	ft_init_subshell(t_env *env, int *status)
-{
-	int	pid;
+// int	ft_init_subshell(t_env *env, int *status)
+// {
+// 	int	pid;
 
-	pid = fork();
-	if (pid == 0)
-	{
-		ft_load_history(env->path_history);
-		signal(SIGINT, SIG_DFL);
-		if (!ft_loop(env))
-			exit(0);
-	}
-	if (pid < 0)
-		return (ft_error("err", 0), 0);
-	waitpid(pid, status, 0);
-	return (*status);
-}
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		ft_load_history(env->path_history);
+// 		signal(SIGINT, SIG_DFL);
+// 		if (!ft_loop(env))
+// 			exit(0);
+// 	}
+// 	if (pid < 0)
+// 		return (ft_error("err", 0), 0);
+// 	waitpid(pid, status, 0);
+// 	return (*status);
+// }
