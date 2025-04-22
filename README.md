@@ -3,8 +3,6 @@
 
 # Minishell
 
-Repositorio raíz: [Minishell en GitHub](https://github.com/Leined18/Minishell)
-
 Este proyecto implementa una versión básica de un shell en C. La organización del proyecto sigue la siguiente estructura, con enlaces directos a cada archivo.
 
 ## Estructura del Proyecto
